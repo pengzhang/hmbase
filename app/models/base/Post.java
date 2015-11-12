@@ -10,20 +10,20 @@ import javax.persistence.Table;
 import models.BaseModel;
 
 @Entity
-@Table(name="article")
-@org.hibernate.annotations.Table(comment="文章管理", appliesTo = "article")
-public class Article extends BaseModel {
+@Table(name="post")
+@org.hibernate.annotations.Table(comment="内容管理", appliesTo = "post")
+public class Post extends BaseModel {
 	
-	@Column(nullable=false,columnDefinition="varchar(255) comment '文章标题'")
+	@Column(nullable=false,columnDefinition="varchar(255) comment '标题'")
 	public String title;
 	
-	@Column(columnDefinition="varchar(255) comment '文章子标题'")
+	@Column(columnDefinition="varchar(255) comment '子标题'")
 	public String subtitle;
 	
-	@Column(columnDefinition="varchar(255) comment '文章简介'")
+	@Column(columnDefinition="varchar(255) comment '简介'")
 	public String introduction;
 	
-	@Column(columnDefinition="text comment '文章内容'")
+	@Column(columnDefinition="text comment '内容'")
 	public String content;
 	
 	@Column(columnDefinition="varchar(255) comment '封面图'")
@@ -38,12 +38,13 @@ public class Article extends BaseModel {
 	@Column(columnDefinition="tinyint comment '0-普通 1-热文'")
 	public boolean hot = false;
 	
-	@Column(columnDefinition="tinyint comment '0-普通文章 1-滚动'")
+	@Column(columnDefinition="tinyint comment '0-普通 1-滚动'")
 	public boolean banner = false;
 	
 	public User user;
 	
-	public Category category;
+	@OneToMany
+	public List<Category> categories;
 	
 	@OneToMany
 	public List<Image> images;

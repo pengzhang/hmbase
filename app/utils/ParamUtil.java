@@ -14,9 +14,21 @@ public class ParamUtil {
 		}
 	}
 
-	public static void validateIntGTZero(int... params) throws ParamException {
-		for (int param : params) {
-			if (param <= 0) {
+	public static void validateInt(Integer... params) throws ParamException {
+		for (Integer param : params) {
+			if (param == null) {
+				throw new ParamException("param is null");
+			} else if (param <= 0) {
+				throw new ParamException("param less than or equals 0");
+			}
+		}
+	}
+	
+	public static void validateIntGEZero(Integer... params) throws ParamException {
+		for (Integer param : params) {
+			if (param == null) {
+				throw new ParamException("param is null");
+			} else if (param < 0) {
 				throw new ParamException("param less than 0");
 			}
 		}
@@ -26,10 +38,8 @@ public class ParamUtil {
 		for (Long param : params) {
 			if (param == null) {
 				throw new ParamException("param is null");
-			} else {
-				if (param <= 0) {
-					throw new ParamException("param_less_than_0");
-				}
+			} else if (param <= 0) {
+				throw new ParamException("param less than or equals 0");
 			}
 		}
 	}
@@ -38,10 +48,8 @@ public class ParamUtil {
 		for (Long param : params) {
 			if (param == null) {
 				throw new ParamException("param is null");
-			} else {
-				if (param < 0) {
-					throw new ParamException("param less than 0");
-				}
+			} else if (param < 0) {
+				throw new ParamException("param less than 0");
 			}
 		}
 	}

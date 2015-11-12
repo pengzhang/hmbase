@@ -2,3 +2,6 @@
 
 require:
     - play
+    - net.glxn -> qrgen 1.4
+    - eu.bitwalker -> UserAgentUtils 1.18
+    - org.jsoup -> jsoup 1.8.3

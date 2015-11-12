@@ -2,7 +2,7 @@ package utils;
 
 import exceptions.ServiceException;
 
-public class NumberUtil {
+public class HMNumberUtil {
 
 	public static int defaultInteger(Integer param, int defaultValue) {
 		if (param == null) {

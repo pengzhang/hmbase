@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import models.BaseModel;
@@ -41,6 +42,7 @@ public class Post extends BaseModel {
 	@Column(columnDefinition="tinyint comment '0-普通 1-滚动'")
 	public boolean banner = false;
 	
+	@OneToOne
 	public User user;
 	
 	@OneToMany

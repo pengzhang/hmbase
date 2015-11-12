@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import models.BaseModel;
@@ -19,6 +20,7 @@ public class Comment extends BaseModel {
 	@Column(nullable=false,columnDefinition="varchar(2000) comment '评论内容'")
     public String content;
 	
+	@OneToOne
 	public User user;
 	
 	@ManyToOne

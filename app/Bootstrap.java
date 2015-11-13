@@ -3,4 +3,8 @@ import play.jobs.OnApplicationStart;
 
 @OnApplicationStart
 public class Bootstrap extends Job {
+	
+	public void doJob(){
+		// TODO
+	}
 }

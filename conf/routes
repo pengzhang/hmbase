@@ -6,6 +6,10 @@
 GET     /                                       Application.index
 
 
+# User Controller
+GET     /user/login                             UserController.login
+POST    /user/login                             UserController.doLogin
+GET     /user/logout                            UserController.logout
 
 # Assist
 GET     /captcha                                Assist.captcha
@@ -13,8 +17,7 @@ POST    /upload/file                            Assist.upload
 
 # Admin Controller
 GET     /admin                                  AdminController.index
-GET     /admin/login                            AdminController.login
-POST    /admin/login                            AdminController.doLogin
+
 
 # Api Controller
 POST    /api/login                              ApiController.login

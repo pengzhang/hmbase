@@ -48,7 +48,7 @@ public class ActionInterceptor extends Controller {
 
 	private static void loginPage(){
     	if(session.get("userId") == null){
-    		redirect("/login");
+    		redirect("/user/login");
     	}
     }
     

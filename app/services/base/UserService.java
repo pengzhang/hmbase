@@ -22,19 +22,6 @@ public class UserService {
 		return user;
 	}
 	
-	public static User adminLogin(String username, String password) throws ParamException, ServiceException{
-		ParamUtil.validateString(username, password);
-		User user = User.find("username=? and password=? and status=?", username, DigestUtils.md5Hex(password), false).first();
-		if(user == null){
-			throw new ServiceException("用户名或者密码错误");
-		}else if(user.type !=0 || user.type != 1){
-			throw new ServiceException("权限不足");
-		}
-		Notify.all(user, "login");
-		//TODO LoginLog
-		return user;
-	}
-	
 	public static boolean register(User user) throws ParamException, ServiceException{
 		ParamUtil.validateObject(user);
 		User $user = User.find("username=? and status=?", user.username, false).first();

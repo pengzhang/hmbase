@@ -10,9 +10,9 @@
 			<a class="navbar-brand" href="#"><span>XXX</span>-管理平台</a>
 			<ul class="user-menu">
 				<li class="dropdown pull-right">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> 管理员:${session.get('admin')} <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> 管理员:${session.get('username')} <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="/admin/logout"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li>
+						<li><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li>
 					</ul>
 				</li>
 			</ul>

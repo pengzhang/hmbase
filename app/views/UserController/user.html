@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>#{get 'title' /}</title>
+
+<link href="/public/stylesheets/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="/public/stylesheets/user/styles.css" rel="stylesheet">
+#{get 'moreStyles' /}
+
+<!--[if lt IE 9]>
+<script src="/public/javascripts/html5shiv.min.js"></script>
+<script src="/public/javascripts/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+	#{doLayout /}
+
+	<script src="/public/javascripts/jquery-1.11.1.min.js"></script>
+	<script src="/public/javascripts/bootstrap/bootstrap.min.js"></script>
+	<script src="/public/javascripts/bootstrap/bootstrap-datepicker.js"></script>
+	
+	 #{get 'moreScripts' /}
+</body>
+
+</html>

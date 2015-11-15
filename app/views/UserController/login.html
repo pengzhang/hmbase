@@ -1,13 +1,13 @@
-#{extends 'AdminController/admin.html' /} 	
+#{extends 'UserController/user.html' /} 	
 <div class="row">
-	<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+	<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-3 col-md-offset-8">
 		<div class="login-panel panel panel-default">
 			<div class="panel-heading">欢迎登录</div>
 			<div class="panel-body">
 				#{if flash.get("error")}
 				<div class="alert alert-warning" role="alert">${flash.get("error")}</div>
 				#{/if}
-				<form role="form" method="post" action="/admin/login">
+				<form role="form" method="post" action="/user/login">
 					<fieldset>
 						<div class="form-group">
 							<input class="form-control" placeholder="用户名" name="username" type="text" autofocus>

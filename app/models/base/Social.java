@@ -8,7 +8,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import play.db.Model;
+import utils.SQLUtil;
+import exceptions.ServiceException;
 import models.BaseModel;
+import models.data.PageData;
 
 @Entity
 @Table(name="social")
@@ -26,5 +30,13 @@ public class Social extends BaseModel {
 	
 	@OneToMany
 	public List<Image> images;
+	
+	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
+		return SQLUtil.findByPage(Social.class, page, size, search, searchFields, orderBy, order, where);
+	}
+	
+	public static PageData findByPageData(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
+		return SQLUtil.findByPageData(Social.class, page, size, search, searchFields, orderBy, order, where);
+	}
 	
 }

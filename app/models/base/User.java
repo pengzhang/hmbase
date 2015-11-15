@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import play.db.Model;
+import utils.SQLUtil;
+import exceptions.ServiceException;
 import models.BaseModel;
+import models.data.PageData;
 
 @Entity
 @Table(name="user")
@@ -53,13 +57,13 @@ public class User extends BaseModel {
 	@Column(columnDefinition = "varchar(255) comment '职位'")
 	public String jobtitle;
 	
-	@Column(columnDefinition = "varchar(255) comment '工作年限'")
+	@Column(name="work_years",columnDefinition = "varchar(255) comment '工作年限'")
 	public String workYears;
 	
 	@Column(columnDefinition = "varchar(255) comment '城市'")
 	public String city;
 	
-	@Column(name = "usersign", columnDefinition = "varchar(255) comment '用户签名'")
+	@Column(name = "user_sign", columnDefinition = "varchar(255) comment '用户签名'")
 	public String userSign;
 	//我的标签
 	@OneToMany
@@ -76,5 +80,13 @@ public class User extends BaseModel {
 	
 	@OneToMany
 	public List<Comment> comments;
+	
+	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
+		return SQLUtil.findByPage(User.class, page, size, search, searchFields, orderBy, order, where);
+	}
+	
+	public static PageData findByPageData(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
+		return SQLUtil.findByPageData(User.class, page, size, search, searchFields, orderBy, order, where);
+	}
 	
 }

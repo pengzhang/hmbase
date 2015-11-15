@@ -39,6 +39,24 @@ public class ParamUtil {
     		throw new  ParamException("Json参数错误,请检查");
     	}
     }
+    
+    /**
+     * 处理 request body 转换为 Params
+     * @param body
+     * @throws ParamException
+     */
+    public static void getEditParams(InputStream body) throws ParamException{
+    	try{
+    		Map<String,String> t = new GsonBuilder().create().fromJson(new InputStreamReader(body), new TypeToken<Map<String, String>>() {  
+            }.getType());
+    		for(String key : t.keySet()){
+    			Params.current().put(key, String.valueOf(t.get(key)));
+    		}
+    	}catch (Exception e){
+    		e.printStackTrace();
+    		throw new  ParamException("Json参数错误,请检查");
+    	}
+    }
 
 	public static void validateString(String... params) throws ParamException{
 		for (String param : params) {

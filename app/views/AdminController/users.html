@@ -1,0 +1,108 @@
+#{extends 'AdminController/admin.html' /} 
+#{set title:'成员列表' /}
+#{include 'AdminController/nav.html'/}
+#{include 'AdminController/sidebar.html'/}
+#{set 'moreStyles' }
+	<link href="/public/stylesheets/bootstrap/bootstrap-table.css" rel="stylesheet">
+#{/set}
+
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+			<li class="active">成员列表</li>
+		</ol>
+	</div><!--/.row-->
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">成员列表</h1>
+		</div>
+	</div><!--/.row-->
+			
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">全部成员列表</div>
+				<div class="panel-body">
+					<p class="toolbar">
+			            <span class="alert"></span>
+			        </p>
+					<table id="table" data-toggle="table" data-query-params="queryParams" data-toolbar=".toolbar" data-side-pagination="server" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="createDate" data-sort-order="desc">
+					    <thead>
+					    <tr>
+					       		<th data-field="state" data-checkbox="true" ></th>
+						        <th data-field="id" data-sortable="true">成员ID</th>
+						        <th data-field="avatar"  data-sortable="true" data-formatter="avatarFormatter">头像</th>
+						        <th data-field="username"  data-sortable="true" data-formatter="sub10Formatter">用户名</th>
+						        <th data-field="nickname"  data-sortable="true" data-formatter="sub10Formatter">昵称</th>
+						        <th data-field="realname"  data-sortable="true">手机号</th>
+						        <th data-field="email"  data-sortable="true" data-formatter="sub20Formatter">邮箱</th>
+						        <th data-field="type"  data-sortable="true" data-formatter="typeFormatter">用户类型</th>
+						        <th data-field="gender"  data-sortable="true" data-formatter="genderFormatter">性别</th>
+						        <th data-field="cardId"  data-sortable="true" >身份证号</th>
+						        <th data-field="level"  data-sortable="true" data-formatter="levelFormatter">级别</th>
+						        <th data-field="company"  data-sortable="true" data-formatter="sub10Formatter">公司</th>
+						        <th data-field="jobtitle"  data-sortable="true" data-formatter="sub10Formatter">职位</th>
+						        <th data-field="workYears"  data-sortable="true" >工作年限</th>
+						        <th data-field="city"  data-sortable="true" data-formatter="sub10Formatter">城市</th>
+						        <th data-field="userSign"  data-sortable="true" data-formatter="sub20Formatter">用户签名</th>
+						        <th data-field="status" data-sortable="true" data-formatter="statusFormatter">状态</th>
+						        <th data-field="createDate" data-sortable="true" data-formatter="dateFormatter">创建日期</th>
+						        <th data-field="updateDate" data-sortable="true" data-formatter="dateFormatter">修改日期</th>
+						        <th data-field="action"
+				                    data-align="center"
+				                    data-formatter="actionFormatter"
+				                    data-events="actionEvents">操作</th>
+					    </tr>
+					    </thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div><!--/.row-->
+		
+</div><!--/.main-->
+
+#{set 'moreScripts' }
+	<script src="/public/javascripts/bootstrap/bootstrap-table.js"></script>
+	<script src="/public/javascripts/datetime/date-format.js"></script>
+	<script type="text/javascript">
+		var API_URL_GET = '/admin/users/data';
+		var API_URL_DELETE = '/admin/users/remove?';
+		function avatarFormatter(value) {
+			if(value){
+				return '<img src="'+value+'">';
+			}
+		}
+		function typeFormatter(value) {
+			if(value=0){
+				return '<span class="label label-danger">超级管理员</span>';
+			}else if(value=1){
+				return '<span class="label label-warning">管理员</span>';
+			}else if(value=2){
+				return '<span class="label label-success">vip</span>';
+			}else {
+				return '<span class="label label-info">普通用户</span>';
+			}
+		}
+		function genderFormatter(value) {
+			if(value){
+				return '<span class="label label-info">女</span>';
+			}
+			return '<span class="label label-info">男</span>';
+		}
+		function levelFormatter(value) {
+			return '<span class="label label-default">LV '+value+'</span>';
+		}
+		function statusFormatter(value) {
+			if(value){
+				return '<span class="label label-danger">已删除</span>';
+			}
+			return '<span class="label label-success">正常</span>';
+		}
+	</script>
+	<script src="/public/javascripts/bootstrap/bootstrap-table-crud.js"></script>
+#{/set}
+

@@ -40,17 +40,18 @@ $(function () {
     });
 });
 
-//function queryParams(params) {
-//	$.extend(params,{'id':2});
-//    return params;
-//}
 
-//function actionFormatter(value) {
-//    return [
-//        '<a class="update" style="color: #333;margin-right: 5px;" href="javascript:" title="修改"><i class="glyphicon glyphicon-edit"></i></a>',
-//        '<a class="remove" style="color: red;margin-left: 5px;" href="javascript:" title="删除"><i class="glyphicon glyphicon-remove-circle"></i></a>',
-//    ].join('');
-//}
+function queryParams(params) {
+	$.extend(params,{'id':2});
+    return params;
+}
+
+function actionFormatter(value) {
+    return [
+        '<a class="update" style="color: #333;margin-right: 5px;" href="javascript:" title="修改"><i class="glyphicon glyphicon-edit"></i></a>',
+        '<a class="remove" style="color: red;margin-left: 5px;" href="javascript:" title="删除"><i class="glyphicon glyphicon-remove-circle"></i></a>',
+    ].join('');
+}
 
 // update and delete events
 window.actionEvents = {
@@ -97,4 +98,28 @@ function showAlert(title, type) {
     setTimeout(function () {
         $alert.hide();
     }, 3000);
+}
+
+function sub10Formatter(value) {
+	if(value){
+		return value.substring(0,10);
+	}
+	return "";
+}
+
+function sub20Formatter(value) {
+	if(value){
+		return value.substring(0,20);
+	}
+	return "";
+}
+
+function sub80Formatter(value) {
+	if(value){
+		if(value.length>50){
+			return value.substring(0,80)+'...[未显示'+(value.length-80)+'字]';
+		}
+		return value;
+	}
+	return '';
 }

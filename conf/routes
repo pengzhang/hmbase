@@ -18,6 +18,16 @@ POST    /upload/file                            Assist.upload
 # Admin Controller
 GET     /admin                                  AdminController.index
 
+GET     /admin/users                            AdminController.users
+GET     /admin/users/data                       AdminController.usersData
+
+GET     /admin/categories                       AdminController.categories
+GET     /admin/categories/data                  AdminController.categoriesData
+POST    /admin/categories/create                AdminController.createCategory
+POST    /admin/categories/modify                AdminController.modifyCategory
+GET     /admin/categories/remove                AdminController.deleteCategory
+GET     /admin/categories/data                  AdminController.categoriesData
+
 
 # Api Controller
 POST    /api/login                              ApiController.login

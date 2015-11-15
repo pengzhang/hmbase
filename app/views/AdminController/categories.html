@@ -1,0 +1,113 @@
+#{extends 'AdminController/admin.html' /} 
+#{set title:'分类列表' /}
+#{include 'AdminController/nav.html'/}
+#{include 'AdminController/sidebar.html'/}
+#{set 'moreStyles' }
+	<link href="/public/stylesheets/bootstrap/bootstrap-table.css" rel="stylesheet">
+#{/set}
+
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+			<li class="active">分类列表</li>
+		</ol>
+	</div><!--/.row-->
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">分类列表</h1>
+		</div>
+	</div><!--/.row-->
+			
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">全部分类列表</div>
+				<div class="panel-body">
+					<p class="toolbar">
+						<a class="create btn btn-primary" href="javascript:void(0);">创建分类</a>
+			            <span class="alert"></span>
+			        </p>
+					<table id="table" data-toggle="table" data-query-params="queryParams" data-toolbar=".toolbar" data-side-pagination="server" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="createDate" data-sort-order="desc">
+					    <thead>
+					    <tr>
+					       		<th data-field="state" data-checkbox="true" ></th>
+						        <th data-field="id" data-sortable="true">分类ID</th>
+						        <th data-field="category"  data-sortable="true" data-formatter="sub10Formatter">分类名称</th>
+						        <th data-field="description"  data-sortable="true" data-formatter="sub10Formatter">分类描述</th>
+						        <th data-field="categoryOrder"  data-sortable="true">分类排序</th>
+						        <th data-field="recommend"  data-sortable="true" data-formatter="recommendFormatter">推荐</th>
+						        <th data-field="status" data-sortable="true" data-formatter="statusFormatter">状态</th>
+						        <th data-field="createDate" data-sortable="true" data-formatter="dateFormatter">创建日期</th>
+						        <th data-field="updateDate" data-sortable="true" data-formatter="dateFormatter">修改日期</th>
+						        <th data-field="action"
+				                    data-align="center"
+				                    data-formatter="actionFormatter"
+				                    data-events="actionEvents">操作</th>
+					    </tr>
+					    </thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div><!--/.row-->
+	<div id="modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>分类名称</label>
+                        <input type="text" class="form-control" name="category" placeholder="分类名称">
+                    </div>
+                    <div class="form-group">
+                        <label>分类描述</label>
+                        <input type="text" class="form-control" name="description" placeholder="分类描述">
+                    </div>
+                    <div class="form-group">
+                        <label>分类排序</label>
+                        <input type="text" class="form-control" name="categoryOrder" placeholder="分类排序">
+                    </div>
+                    <div class="form-group">
+                        <label>推荐</label>
+                        <input type="checkbox" class="form-control" name="recommend" value="true">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary submit">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->	
+</div><!--/.main-->
+
+#{set 'moreScripts' }
+	<script src="/public/javascripts/bootstrap/bootstrap-table.js"></script>
+	<script src="/public/javascripts/datetime/date-format.js"></script>
+	<script type="text/javascript">
+		var API_URL_CREATE = '/admin/categories/create';
+		var API_URL_UPDATE = '/admin/categories/modify?id=';
+		var API_URL_GET = '/admin/categories/data';
+		var API_URL_DELETE = '/admin/categories/remove?id=';
+		function recommendFormatter(value) {
+			if(value){
+				return '<span class="label label-info">推荐</span>';
+			}
+			return '<span class="label label-info">普通</span>';
+		}
+		function statusFormatter(value) {
+			if(value){
+				return '<span class="label label-danger">已删除</span>';
+			}
+			return '<span class="label label-success">正常</span>';
+		}
+	</script>
+	<script src="/public/javascripts/bootstrap/bootstrap-table-crud.js"></script>
+#{/set}
+

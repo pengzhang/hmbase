@@ -1,0 +1,97 @@
+#{extends 'AdminController/admin.html' /} 
+#{set title:'后台管理' /}
+#{include 'AdminController/nav.html'/}
+#{include 'AdminController/sidebar.html'/}
+#{set 'moreStyles' }
+#{/set}
+#{set 'moreScripts' }
+	<script src="/public/javascripts/chart/chart.min.js"></script>
+	<script src="/public/javascripts/chart/chart-data.js"></script>
+	<script src="/public/javascripts/easypiechart/easypiechart.js"></script>
+	<script src="/public/javascripts/easypiechart/easypiechart-data.js"></script>
+#{/set}		
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+			<li class="active">控制台</li>
+		</ol>
+	</div><!--/.row-->
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">控制台</h1>
+		</div>
+	</div><!--/.row-->
+       
+	<div class="row">
+		<div class="col-xs-12 col-md-6 col-lg-3">
+			<div class="panel panel-blue panel-widget ">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<em class="glyphicon glyphicon-book glyphicon-l"></em>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large">${postTotal}</div>
+						<div class="text-muted">内容总数</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6 col-lg-3">
+			<div class="panel panel-orange panel-widget">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<em class="glyphicon glyphicon-list-alt glyphicon-l"></em>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large">${imageTotal}</div>
+						<div class="text-muted">图片总数</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6 col-lg-3">
+			<div class="panel panel-red panel-widget">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<em class="glyphicon glyphicon-comment glyphicon-l"></em>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large">${commentTotal}</div>
+						<div class="text-muted">评论总数</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6 col-lg-3">
+			<div class="panel panel-teal panel-widget">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<em class="glyphicon glyphicon-user glyphicon-l"></em>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large">${userTotal}</div>
+						<div class="text-muted">用户总数</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div><!--/.row-->
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">最近15天访问趋势</div>
+				<div class="panel-body">
+					<div class="canvas-wrapper">
+						<input type="hidden" id="chart_data_title" value="chart_title">
+						<input type="hidden" id="chart_data_content" value="chart_content">
+						<canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!--/.row-->
+</div>	<!--/.main-->

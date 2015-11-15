@@ -11,7 +11,7 @@ import models.BaseModel;
 
 @Entity
 @Table(name="user")
-@org.hibernate.annotations.Table(comment="用户信息", appliesTo = "user")
+@org.hibernate.annotations.Table(comment="用户信息_status:0_正常,1_删除", appliesTo = "user")
 public class User extends BaseModel {
 	
 	@Column(columnDefinition = "varchar(255) comment '用户名'")

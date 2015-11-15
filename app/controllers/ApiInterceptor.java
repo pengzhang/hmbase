@@ -1,9 +1,8 @@
 package controllers;
 
-import org.bouncycastle.asn1.ocsp.ResponseData;
-
-import com.google.gson.Gson;
-
+import models.base.User;
+import models.data.ResponseData;
+import models.logs.AccessLog;
 import play.mvc.Before;
 import play.mvc.Catch;
 import play.mvc.Controller;
@@ -22,12 +21,12 @@ public class ApiInterceptor extends Controller {
     }
 
 	private static void authorize() {
-//		String ak = request.headers.get("access_token").value();
-//		User user = User.find("accessToken", ak).first();
-//		if(user != null){
-//			renderJSON(ResponseData.response(false, "illegal access,您无权访问!"));
-//		}
-//		AccessLog.record(request, user.id, true);
+		String ak = request.headers.get("access_token").value();
+		User user = User.find("accessToken", ak).first();
+		if(user != null){
+			renderJSON(ResponseData.response(false, "illegal access,您无权访问!"));
+		}
+		AccessLog.record(request, user.id, true);
 	}
 
     /**
@@ -38,12 +37,7 @@ public class ApiInterceptor extends Controller {
     public static void exceptionProcess(Throwable t)
     {
         t.printStackTrace();
-//        renderJSON(ResponseData.response(false, "application error,程序错误,请检查参数,稍后重置!"));
+        renderJSON(ResponseData.response(false, "application error,程序错误,请检查参数,稍后重置!"));
     }
-    
-//    public static void main(String[] args) {
-//		System.out.println(new Gson().toJson(ResponseData.response(false, "illegal access,您无权访问!")));
-//		System.out.println(new Gson().toJson(ResponseData.response(false, "application error,程序错误,请检查参数,稍后重置!")));
-//	}
 
 }

@@ -2,10 +2,14 @@ package controllers;
 
 import java.util.Arrays;
 
-import annotation.Login;
+import models.logs.AccessLog;
+
+import org.apache.commons.lang.math.NumberUtils;
+
 import play.mvc.Before;
 import play.mvc.Catch;
 import play.mvc.Controller;
+import annotation.Login;
 
 /**
  * 拦截器
@@ -22,7 +26,7 @@ public class ActionInterceptor extends Controller {
 
 	private static void authorize() {
 		
-//		AccessLog.record(request, NumberUtils.toLong(session.get("userId")), false);
+		AccessLog.record(request, NumberUtils.toLong(session.get("userId")), false);
 		
 		try {
 			Class controller = Class.forName("controllers."	+ request.action.substring(0, request.action.lastIndexOf(".")));

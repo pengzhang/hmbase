@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import models.base.ImageUpload;
+import models.data.Simditor;
 import play.Play;
 import play.cache.Cache;
 import play.db.jpa.Blob;
@@ -39,11 +40,11 @@ public class Assist extends Controller {
 			upload.name = upload_file.getName();
 			upload.file.set(new FileInputStream(upload_file), MimeTypes.getContentType(upload_file.getName()));
 			upload.save();
-//			renderJSON(new Simditor(true, "upload success", ImageServerDomain + "/upload/" + upload.file.getUUID()));
+			renderJSON(new Simditor(true, "upload success", ImageServerDomain + "/upload/" + upload.file.getUUID()));
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-//			renderJSON(new Simditor(false, "upload failure", ""));
+			renderJSON(new Simditor(false, "upload failure", ""));
 		}
 
 	}

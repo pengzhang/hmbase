@@ -50,5 +50,12 @@ public class Category extends BaseModel {
 	public static PageData findByPageData(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPageData(Category.class, page, size, search, searchFields, orderBy, order, where);
 	}
+
+	@Override
+	public String toString() {
+		return "Category [category=" + category + ", description=" + description + ", categoryOrder=" + categoryOrder
+				+ ", recommend=" + recommend + ", parent=" + parent + ", children=" + children + ", posts=" + posts
+				+ ", images=" + images + "]";
+	}
 	
 }

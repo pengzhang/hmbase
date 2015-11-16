@@ -19,34 +19,34 @@ POST    /upload/file                            Assist.upload
 GET     /admin                                  AdminController.index
 
 GET     /admin/users                            AdminController.users
-POST    /admin/users/create                     AdminUser.createUser
-POST    /admin/users/modify                     AdminUser.modifyUser
-GET     /admin/users/remove                     AdminUser.removeUser
-GET     /admin/users/data                       AdminUser.usersData
+POST    /admin/users/create                     admin.AdminUser.createUser
+POST    /admin/users/modify                     admin.AdminUser.modifyUser
+GET     /admin/users/remove                     admin.AdminUser.removeUser
+GET     /admin/users/data                       admin.AdminUser.usersData
 
 GET     /admin/categories                       AdminController.categories
-POST    /admin/categories/create                AdminCategory.createCategory
-POST    /admin/categories/modify                AdminCategory.modifyCategory
-GET     /admin/categories/remove                AdminCategory.removeCategory
-GET     /admin/categories/data                  AdminCategory.categoriesData
+POST    /admin/categories/create                admin.AdminCategory.createCategory
+POST    /admin/categories/modify                admin.AdminCategory.modifyCategory
+GET     /admin/categories/remove                admin.AdminCategory.removeCategory
+GET     /admin/categories/data                  admin.AdminCategory.categoriesData
 
 GET     /admin/posts                            AdminController.posts
-POST    /admin/posts/create                     AdminPost.createPost
-POST    /admin/posts/modify                     AdminPost.modifyPost
-GET     /admin/posts/remove                     AdminPost.removePost
-GET     /admin/posts/data                       AdminPost.postsData
+POST    /admin/posts/create                     admin.AdminPost.createPost
+POST    /admin/posts/modify                     admin.AdminPost.modifyPost
+GET     /admin/posts/remove                     admin.AdminPost.removePost
+GET     /admin/posts/data                       admin.AdminPost.postsData
 
 GET     /admin/comments                         AdminController.comments
-POST    /admin/comments/create                  AdminComment.createComment
-POST    /admin/comments/modify                  AdminComment.modifyComment
-GET     /admin/comments/remove                  AdminComment.removeComment
-GET     /admin/comments/data                    AdminComment.commentsData
+POST    /admin/comments/create                  admin.AdminComment.createComment
+POST    /admin/comments/modify                  admin.AdminComment.modifyComment
+GET     /admin/comments/remove                  admin.AdminComment.removeComment
+GET     /admin/comments/data                    admin.AdminComment.commentsData
 
 GET     /admin/images                           AdminController.images
-POST    /admin/images/create                    AdminImage.createImage
-POST    /admin/images/modify                    AdminImage.modifyImage
-GET     /admin/images/remove                    AdminImage.removeImage
-GET     /admin/images/data                      AdminImage.imagesData
+POST    /admin/images/create                    admin.AdminImage.createImage
+POST    /admin/images/modify                    admin.AdminImage.modifyImage
+GET     /admin/images/remove                    admin.AdminImage.removeImage
+GET     /admin/images/data                      admin.AdminImage.imagesData
 
 # Api Controller
 POST    /api/login                              ApiController.login

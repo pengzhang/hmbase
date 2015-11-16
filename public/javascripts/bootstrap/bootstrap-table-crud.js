@@ -82,11 +82,10 @@ function showModal(title, row) {
         forks_count: 0,
         description: ''
     }; // default row value
-
     $modal.data('id', row.id);
     $modal.find('.modal-title').text(title);
     for (var name in row) {
-        $modal.find('input[name="' + name + '"]').val(row[name]);
+    	$modal.find('input[name="' + name + '"]').val(row[name]);
         $modal.find('select[name="' + name + '"]').val(row[name]);
     }
     $modal.modal('show');

@@ -47,7 +47,7 @@ public class ParamUtil {
      */
     public static void getEditParams(InputStream body) throws ParamException{
     	try{
-    		Map<String,String> t = new GsonBuilder().create().fromJson(new InputStreamReader(body), new TypeToken<Map<String, String>>() {  
+    		Map<String,Object> t = new GsonBuilder().create().fromJson(new InputStreamReader(body), new TypeToken<Map<String, Object>>() {  
             }.getType());
     		for(String key : t.keySet()){
     			Params.current().put(key, String.valueOf(t.get(key)));

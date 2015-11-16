@@ -32,38 +32,24 @@ public class AdminController extends Controller {
     	render(menu);
     }
     
-    public static void usersData(Integer limit, Integer offset, String search, String sort, String order){
-    	renderJSON(User.findByPageData(offset/limit+1, limit, search, "username", sort, order, null));
-    }
-    
     public static void categories(){
     	String menu = "category";
     	render(menu);
     }
     
-    public static void createCategory(){
-    	Category category = ParamUtil.getJsonParams(request.body, Category.class);
-    	category.save();
-    	renderJSON(ResponseData.response(true, "分类创建成功"));
+    public static void posts(){
+    	String menu = "post";
+    	render(menu);
     }
     
-    public static void modifyCategory(long id){
-    	Category category = Category.findById(id);
-    	ParamUtil.getEditParams(request.body);
-    	category.edit(params.getRootParamNode(), "");
-    	category.updateDate = new Date();
-    	category.save();
+    public static void comments(){
+    	String menu = "comment";
+    	render(menu);
     }
     
-    public static void deleteCategory(long id){
-    	Category category = Category.findById(id);
-    	category.updateDate = new Date();
-    	category.status = true;
-    	category.save();
-    }
-    
-    public static void categoriesData(Integer limit, Integer offset, String search, String sort, String order){
-    	renderJSON(Category.findByPageData(offset/limit+1, limit, search, "category", sort, order, null));
+    public static void images(){
+    	String menu = "image";
+    	render(menu);
     }
 
 }

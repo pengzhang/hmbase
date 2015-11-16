@@ -17,7 +17,14 @@ $(function () {
         var row = {};
 
         $modal.find('input[name]').each(function () {
-            row[$(this).attr('name')] = $(this).val();
+        	if($(this).attr("type")=="text"){
+        		row[$(this).attr('name')] = $(this).val();
+        	}else if($(this).attr("type")=="radio"){
+        		if($(this).attr("checked")){
+        			row[$(this).attr('name')] = $(this).val();
+        		}
+        	}
+            
         });
         $modal.find('select[name]').each(function () {
             row[$(this).attr('name')] = $(this).val();
@@ -85,7 +92,12 @@ function showModal(title, row) {
     $modal.data('id', row.id);
     $modal.find('.modal-title').text(title);
     for (var name in row) {
-    	$modal.find('input[name="' + name + '"]').val(row[name]);
+    	$modal.find('input[name="' + name + '"][type="radio"]').each(function(){
+   		 if($(this).val()==(row[name]+'')){
+   			 $(this).attr("checked",true);
+   		 }
+    	});
+    	$modal.find('input[name="' + name + '"][type="text"]').val(row[name]);
         $modal.find('select[name="' + name + '"]').val(row[name]);
     }
     $modal.modal('show');

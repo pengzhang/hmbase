@@ -19,6 +19,7 @@ public class AdminCategory extends AdminController {
 		Category category = Category.findById(id);
 		ParamUtil.getEditParams(request.body);
 		category.edit(params.getRootParamNode(), "");
+		System.out.println(category);
 		category.updateDate = new Date();
 		category.save();
 		renderJSON(ResponseData.response(true, "分类修改成功"));

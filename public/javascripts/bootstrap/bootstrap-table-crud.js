@@ -17,18 +17,18 @@ $(function () {
         var row = {};
 
         $modal.find('input[name]').each(function () {
-        	if($(this).attr("type")=="text"){
+        	
+        	if($(this).attr("type")==="text"){
         		row[$(this).attr('name')] = $(this).val();
-        	}else if($(this).attr("type")=="radio"){
-        		if($(this).attr("checked")){
-        			row[$(this).attr('name')] = $(this).val();
-        		}
+        	}else if($(this).attr("type")==="radio"){
+        		row[$(this).attr('name')]=$("input[name='"+$(this).attr('name')+"']:checked").val();
         	}
             
         });
         $modal.find('select[name]').each(function () {
             row[$(this).attr('name')] = $(this).val();
         });
+        console.log(row)
         $.ajax({
             url: $modal.data('id') ? API_URL_UPDATE + ($modal.data('id')) : API_URL_CREATE,
             type: 'post',
@@ -93,12 +93,12 @@ function showModal(title, row) {
     $modal.find('.modal-title').text(title);
     for (var name in row) {
     	$modal.find('input[name="' + name + '"][type="radio"]').each(function(){
-   		 if($(this).val()==(row[name]+'')){
-   			 $(this).attr("checked",true);
+   		 if($(this).val()==(row[name])){
+   			 $(this).attr("checked","checked");
    		 }
     	});
     	$modal.find('input[name="' + name + '"][type="text"]').val(row[name]);
-        $modal.find('select[name="' + name + '"]').val(row[name]);
+        //$modal.find('select[name="' + name + '"]').val(row[name]);
     }
     $modal.modal('show');
 }

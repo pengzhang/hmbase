@@ -1,11 +1,28 @@
 package models.logs;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Query;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang.time.DateUtils;
+import org.hibernate.SQLQuery;
+import org.hibernate.transform.Transformers;
+
+import com.google.gson.Gson;
 
 import eu.bitwalker.useragentutils.UserAgent;
 import models.BaseModel;
+import play.db.jpa.JPA;
 import play.mvc.Http.Request;
 
 /**
@@ -70,5 +87,25 @@ public class AccessLog extends BaseModel {
 		accessLog.status = status;
 		accessLog.save();
 	}
+	
+	public static Map<String, String> getRecentAccessRecord(int day) throws ParseException{
+	    
+	    List<String> chart_title = new ArrayList<String>();
+	    List<Long> chart_content = new ArrayList<Long>();
+	    for(int i=0 ; i<day ; i++ ){
+	    	String title = DateFormatUtils.format(DateUtils.addDays(new Date(), -i), "yyyy-MM-dd");
+	    	chart_title.add(title);
+	    	Date start = DateUtils.truncate(DateUtils.addDays(new Date(), -i), Calendar.DAY_OF_MONTH);
+	    	Date end = DateUtils.truncate(DateUtils.addDays(new Date(), -(i-1)), Calendar.DAY_OF_MONTH);
+	    	chart_content.add(AccessLog.count("createDate >= ? and createDate < ?", start, end ));
+	    }
+	    
+	    Map<String,String> map = new HashMap<String,String>();
+	    map.put("chart_title", new Gson().toJson(chart_title).toString());
+	    map.put("chart_content", new Gson().toJson(chart_content).toString());
+	    
+		return map;
+	}
+	
 
 }

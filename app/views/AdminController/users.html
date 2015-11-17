@@ -111,28 +111,76 @@
                         <input type="text" class="form-control" name="avatar" placeholder="头像">
                     </div>
                     <div class="form-group">
-                        <label>级别</label>
-                        <input type="text" class="form-control" name="level" placeholder="级别">
+                        <label class="control-label">级别</label>
+                        <div>
+                    		<label class="radio-inline">
+                        		<input type="radio"  name="level" value="0">Lv 0
+	                        </label>
+	                        <label class="radio-inline">
+	                        	<input type="radio"  name="level" value="1">Lv 1
+	                        </label>
+	                        <label class="radio-inline">
+	                        	<input type="radio"  name="level" value="2">Lv 2
+	                        </label>
+	                        <label class="radio-inline">
+	                        	<input type="radio"  name="level" value="3">Lv 3
+	                        </label>
+                    	</div>
                     </div>
                     <div class="form-group">
-                        <label>用户类型</label>
-                        <input type="text" class="form-control" name="type" placeholder="用户类型">
+                        <label class="control-label">用户类型</label>
+                        <div>
+                    		<label class="radio-inline">
+                        		<input type="radio"  name="type" value="0">超级管理员
+	                        </label>
+	                        <label class="radio-inline">
+	                        	<input type="radio"  name="type" value="1">管理员
+	                        </label>
+	                        <label class="radio-inline">
+	                        	<input type="radio"  name="type" value="2">高级会员
+	                        </label>
+	                        <label class="radio-inline">
+	                        	<input type="radio"  name="type" value="3">普通会员
+	                        </label>
+                    	</div>
                     </div>
                     <div class="form-group">
                         <label>公司</label>
                         <input type="text" class="form-control" name="company" placeholder="公司">
                     </div>
                     <div class="form-group">
-                        <label>职位</label>
-                        <input type="text" class="form-control" name="jobtitle" placeholder="职位">
+                        <label class="control-label">职位</label>
+                        <select name="jobtitle">
+                        	<option value="程序员">程序员</option>
+                        	<option value="设计师">设计师</option>
+                        	<option value="产品经理">产品经理</option>
+                        	<option value="运营专员">运营专员</option>
+                        	<option value="市场专员">市场专员</option>
+                        	<option value="CTO">CTO</option>
+                        	<option value="CEO">CEO</option>
+                        	<option value="其他">其他</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label>工作年限</label>
-                        <input type="text" class="form-control" name="workYears" placeholder="工作年限">
+                        <label class="control-label">工作年限</label>
+                        <select name="workYears">
+                        	<option value="1年">1年</option>
+                        	<option value="1-3年">1-3年</option>
+                        	<option value="3-5年">3-5年</option>
+                        	<option value="5-10年">5-10年</option>
+                        	<option value="10-15年">10-15年</option>
+                        	<option value="15年以上">15年以上</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label>城市</label>
-                        <input type="text" class="form-control" name="city" placeholder="城市">
+                        <label class="control-label">城市</label>
+                        <select name="city">
+                        	<option value="北京">北京</option>
+                        	<option value="上海">上海</option>
+                        	<option value="广州">广州</option>
+                        	<option value="深圳">深圳</option>
+                        	<option value="其他">其他</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>用户签名</label>

@@ -2,8 +2,11 @@ package controllers.admin;
 
 import java.util.Date;
 
+import com.google.gson.GsonBuilder;
+
 import controllers.AdminController;
 import models.base.Comment;
+import models.data.PageData;
 import models.data.ResponseData;
 import utils.ParamUtil;
 
@@ -31,6 +34,8 @@ public class AdminComment extends AdminController {
 	}
 
 	public static void CommentsData(Integer limit, Integer offset, String search, String sort, String order){
-		renderJSON(Comment.findByPageData(offset/limit+1, limit, search, null, sort, order, null));
+		PageData pageData = Comment.findByPageData(offset/limit+1, limit, search, null, sort, order, null);
+//		String json = new GsonBuilder().setPrettyPrinting().serializeNulls().create().toJson(pageData);
+		renderJSON(pageData);
 	}
 }

@@ -115,14 +115,14 @@ function sub10Formatter(value) {
 	if(value){
 		return value.substring(0,10);
 	}
-	return "";
+	return '';
 }
 
 function sub20Formatter(value) {
 	if(value){
 		return value.substring(0,20);
 	}
-	return "";
+	return '';
 }
 
 function sub80Formatter(value) {

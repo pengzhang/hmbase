@@ -27,18 +27,15 @@ public class Comment extends BaseModel {
 	@OneToOne
 	public User user;
 	
+	@OneToOne
+	public Post post;
+	
 	@ManyToOne
 	public Comment parent;
 	
 	@OneToMany
 	public List<Comment> children;
-	
-	@OneToMany
-	public List<Post> posts;
 
-	@OneToMany
-	public List<Image> images;
-	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPage(Comment.class, page, size, search, searchFields, orderBy, order, where);
 	}

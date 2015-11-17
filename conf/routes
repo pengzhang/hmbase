@@ -30,6 +30,12 @@ POST    /admin/categories/modify                admin.AdminCategory.modifyCatego
 GET     /admin/categories/remove                admin.AdminCategory.removeCategory
 GET     /admin/categories/data                  admin.AdminCategory.categoriesData
 
+GET     /admin/tags                             AdminController.tags
+POST    /admin/tags/create                      admin.AdminCategory.createTag
+POST    /admin/tags/modify                      admin.AdminTag.modifyTag
+GET     /admin/tags/remove                      admin.AdminTag.removeTag
+GET     /admin/tags/data                        admin.AdminTag.TagData
+
 GET     /admin/posts                            AdminController.posts
 POST    /admin/posts/create                     admin.AdminPost.createPost
 POST    /admin/posts/modify                     admin.AdminPost.modifyPost

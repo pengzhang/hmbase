@@ -51,5 +51,10 @@ public class AdminController extends Controller {
     	String menu = "image";
     	render(menu);
     }
+    
+    public static void userProfiles(){
+    	String menu = "user_profile";
+    	render(menu);
+    }
 
 }

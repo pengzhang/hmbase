@@ -24,6 +24,12 @@ POST    /admin/users/modify                     admin.AdminUser.modifyUser
 GET     /admin/users/remove                     admin.AdminUser.removeUser
 GET     /admin/users/data                       admin.AdminUser.usersData
 
+GET     /admin/users/profile                    AdminController.userProfiles
+POST    /admin/users/profile/create             admin.AdminUser.createUserProfile
+POST    /admin/users/profile/modify             admin.AdminUser.modifyUserProfile
+GET     /admin/users/profile/remove             admin.AdminUser.removeUserProfile
+GET     /admin/users/profile/data               admin.AdminUser.userProfilesData
+
 GET     /admin/categories                       AdminController.categories
 POST    /admin/categories/create                admin.AdminCategory.createCategory
 POST    /admin/categories/modify                admin.AdminCategory.modifyCategory

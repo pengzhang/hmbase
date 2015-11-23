@@ -2,20 +2,36 @@ package controllers.admin;
 
 import java.util.Date;
 
-import controllers.AdminController;
 import models.base.User;
 import models.data.ResponseData;
+import play.data.validation.Valid;
 import utils.ParamUtil;
+import controllers.AdminController;
 
 public class AdminUser extends AdminController {
 	
-	public static void createUser(){
-		User user = ParamUtil.getJsonParams(request.body, User.class);
+	public static void createOrUpdateUser(Long id){
+		if(id==null){
+			render();
+		}else{
+			User user = User.findById(id);
+			render(user);
+		}
+		
+	}
+	
+	public static void save(@Valid User user){
+		if(validation.hasErrors()){
+			params.flash();
+			validation.keep();
+			createOrUpdateUser(null);
+		}
 		user.save();
-		renderJSON(ResponseData.response(true, "用户创建成功"));
+		flash.success("创建用户%s成功", user.username);
+		redirect("/admin/users");
 	}
 
-	public static void modifyUser(long id){
+	public static void modify(long id){
 		User user = User.findById(id);
 		ParamUtil.getEditParams(request.body);
 		user.updateDate = new Date();

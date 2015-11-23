@@ -4,8 +4,8 @@
 //var API_URL_DELETE = '';
 //var API_URL_GET = '';
 var $table = $('#table').bootstrapTable({url:API_URL_GET}),
-    $modal = $('#modal').modal({show: false}),
-    $alert = $('.alert').hide();
+    $modal = $('#modal').modal({show: false});
+    //$alert = $('.alert').hide();
 
 $(function () {
     // create event

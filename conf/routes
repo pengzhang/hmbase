@@ -19,7 +19,8 @@ POST    /upload/file                            Assist.upload
 GET     /admin                                  AdminController.index
 
 GET     /admin/users                            AdminController.users
-POST    /admin/users/create                     admin.AdminUser.createUser
+GET     /admin/users/create                     admin.AdminUser.createOrUpdateUser
+POST    /admin/users/create                     admin.AdminUser.save
 POST    /admin/users/modify                     admin.AdminUser.modifyUser
 GET     /admin/users/remove                     admin.AdminUser.removeUser
 GET     /admin/users/data                       admin.AdminUser.usersData

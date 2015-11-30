@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -15,6 +14,7 @@ import play.data.validation.Email;
 import play.data.validation.Equals;
 import play.data.validation.Match;
 import play.data.validation.MaxSize;
+import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.db.Model;
 import utils.SQLUtil;
@@ -31,6 +31,7 @@ public class User extends BaseModel {
 	public String username;
 	
 	@Required(message="请填写密码")
+	@MinSize(value=6,message="密码至少6个字符")
 	@Equals(value="repeatPassword",message="两次密码不一致")
 	@Column(columnDefinition = "varchar(255) comment '密码'")
 	public String password;
@@ -58,23 +59,7 @@ public class User extends BaseModel {
 	public int type = 3;
 	
 	@OneToOne
-	public UserProfile userProfile;
-	
-	//我的标签
-	@OneToMany
-	public List<Tag> tags;
-	
-	@OneToMany
-	public List<Post> posts;
-
-	@OneToMany
-	public List<Image> images;
-	
-	@OneToMany
-	public List<Social> socials;
-	
-	@OneToMany
-	public List<Comment> comments;
+	public UserProfile profile;
 	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPage(User.class, page, size, search, searchFields, orderBy, order, where);
@@ -82,6 +67,12 @@ public class User extends BaseModel {
 	
 	public static PageData findByPageData(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPageData(User.class, page, size, search, searchFields, orderBy, order, where);
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", repeatPassword=" + repeatPassword + ", nickname=" + nickname + ", email=" + email + ", mobile=" + mobile + ", avatar="
+				+ avatar + ", type=" + type + ", profile=" + profile + "]";
 	}
 	
 }

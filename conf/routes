@@ -19,10 +19,11 @@ POST    /upload/file                            Assist.upload
 GET     /admin                                  AdminController.index
 
 GET     /admin/users                            AdminController.users
-GET     /admin/users/create                     admin.AdminUser.createOrUpdateUser
+GET     /admin/users/create                     admin.AdminUser.create
 POST    /admin/users/create                     admin.AdminUser.save
-POST    /admin/users/modify                     admin.AdminUser.modifyUser
-GET     /admin/users/remove                     admin.AdminUser.removeUser
+GET     /admin/users/modify                     admin.AdminUser.modify
+POST    /admin/users/modify                     admin.AdminUser.update
+GET     /admin/users/remove                     admin.AdminUser.remove
 GET     /admin/users/data                       admin.AdminUser.usersData
 
 GET     /admin/users/profile                    AdminController.userProfiles

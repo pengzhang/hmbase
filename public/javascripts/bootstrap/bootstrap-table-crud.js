@@ -5,7 +5,7 @@
 //var API_URL_GET = '';
 var $table = $('#table').bootstrapTable({url:API_URL_GET}),
     $modal = $('#modal').modal({show: false});
-    //$alert = $('.alert').hide();
+    $alert = $('.alert');
 
 $(function () {
     // create event
@@ -63,7 +63,8 @@ function actionFormatter(value) {
 // update and delete events
 window.actionEvents = {
     'click .update': function (e, value, row) {
-        showModal($(this).attr('title'), row);
+        //showModal($(this).attr('title'), row);
+    	window.location.href=API_URL_UPDATE + row.id;
     },
     'click .remove': function (e, value, row) {
         if (confirm('真的要删除吗?')) {

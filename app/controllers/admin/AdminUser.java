@@ -5,6 +5,7 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 
 import models.base.User;
+import models.base.UserProfile;
 import models.data.ResponseData;
 import play.data.validation.Valid;
 import play.libs.Crypto;
@@ -24,13 +25,18 @@ public class AdminUser extends AdminController {
 			create();
 		}
 		user.password = Crypto.passwordHash(user.password);
+		
 		user.save();
+		UserProfile profile = new UserProfile();
+		profile.user = user;
+		profile.save();
 		flash.success("创建用户%s成功", user.username);
 		redirect("/admin/users");
 	}
 	
 	public static void modify(Long id){
 		User user = User.findById(id);
+		System.out.println("======" + user.profile);
 		render(user);
 		
 	}
@@ -67,7 +73,6 @@ public class AdminUser extends AdminController {
 	}
 
 	public static void usersData(Integer limit, Integer offset, String search, String sort, String order){
-		System.out.println(order);
 		renderJSON(User.findByPageData(offset/limit+1, limit, search, null, sort, order, null));
 	}
 }

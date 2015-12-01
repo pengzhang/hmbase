@@ -4,6 +4,7 @@ import java.util.Date;
 
 import controllers.AdminController;
 import models.base.UserProfile;
+import models.data.PageData;
 import models.data.ResponseData;
 import utils.ParamUtil;
 

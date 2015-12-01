@@ -27,10 +27,10 @@ GET     /admin/users/remove                     admin.AdminUser.remove
 GET     /admin/users/data                       admin.AdminUser.usersData
 
 GET     /admin/users/profile                    AdminController.userProfiles
-POST    /admin/users/profile/create             admin.AdminUser.createUserProfile
-POST    /admin/users/profile/modify             admin.AdminUser.modifyUserProfile
-GET     /admin/users/profile/remove             admin.AdminUser.removeUserProfile
-GET     /admin/users/profile/data               admin.AdminUser.userProfilesData
+POST    /admin/users/profile/create             admin.AdminUserProfile.createUserProfile
+POST    /admin/users/profile/modify             admin.AdminUserProfile.modifyUserProfile
+GET     /admin/users/profile/remove             admin.AdminUserProfile.removeUserProfile
+GET     /admin/users/profile/data               admin.AdminUserProfile.userProfilesData
 
 GET     /admin/categories                       AdminController.categories
 POST    /admin/categories/create                admin.AdminCategory.createCategory

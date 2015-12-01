@@ -1,22 +1,30 @@
 package models.base;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import exceptions.ServiceException;
 import models.BaseModel;
 import models.data.PageData;
+
+import org.hibernate.annotations.ForeignKey;
+
+import com.google.gson.annotations.Expose;
+
 import play.db.Model;
 import utils.SQLUtil;
+import exceptions.ServiceException;
 
 @Entity
 @Table(name="user_profile")
 @org.hibernate.annotations.Table(comment="用户资料信息_status:0_正常,1_删除", appliesTo = "user_profile")
-public class UserProfile extends BaseModel {
+public class UserProfile extends BaseModel implements Serializable {
 	
 	@Column(columnDefinition = "varchar(255) comment '姓名'")
 	public String realname;
@@ -45,7 +53,9 @@ public class UserProfile extends BaseModel {
 	@Column(name = "user_sign", columnDefinition = "varchar(255) comment '用户签名'")
 	public String userSign;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL,optional=true)
+	@JoinColumn(name="uid")
+	@ForeignKey(name="null")
 	public User user;
 	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
@@ -55,5 +65,5 @@ public class UserProfile extends BaseModel {
 	public static PageData findByPageData(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPageData(UserProfile.class, page, size, search, searchFields, orderBy, order, where);
 	}
-	
+
 }

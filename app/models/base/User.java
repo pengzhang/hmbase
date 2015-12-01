@@ -2,8 +2,11 @@ package models.base;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -58,7 +61,7 @@ public class User extends BaseModel {
 	@Column(columnDefinition = "int comment '类型:0_admin 1_管理员 2_vip 3_普通'")
 	public int type = 3;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="user",optional=false)
 	public UserProfile profile;
 	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
@@ -72,7 +75,7 @@ public class User extends BaseModel {
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", repeatPassword=" + repeatPassword + ", nickname=" + nickname + ", email=" + email + ", mobile=" + mobile + ", avatar="
-				+ avatar + ", type=" + type + ", profile=" + profile + "]";
+				+ avatar + ", type=" + type + "]";
 	}
 	
 }

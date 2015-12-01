@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ForeignKey;
 
 import exceptions.ServiceException;
 import models.BaseModel;
@@ -45,7 +48,12 @@ public class UserProfile extends BaseModel {
 	@Column(name = "user_sign", columnDefinition = "varchar(255) comment '用户签名'")
 	public String userSign;
 	
-	@OneToOne
+	@Column(name = "user_id", columnDefinition = "bigint comment '用户ID'")
+	public long userId;
+	
+	@OneToOne()
+	@JoinColumn(name="user_id",insertable=false, updatable=false)
+	@ForeignKey(name = "null")
 	public User user;
 	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
@@ -55,5 +63,11 @@ public class UserProfile extends BaseModel {
 	public static PageData findByPageData(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPageData(UserProfile.class, page, size, search, searchFields, orderBy, order, where);
 	}
-	
+
+	@Override
+	public String toString() {
+		return "UserProfile [realname=" + realname + ", gender=" + gender + ", cardId=" + cardId + ", level=" + level
+				+ ", company=" + company + ", jobtitle=" + jobtitle + ", workYears=" + workYears + ", city=" + city
+				+ ", userSign=" + userSign + ", userId=" + userId + ", user=" + user + "]";
+	}
 }

@@ -24,7 +24,7 @@ public class UserService {
 		return user;
 	}
 	
-	public static boolean register(User user) throws ParamException, ServiceException{
+	public static User register(User user) throws ParamException, ServiceException{
 		ParamUtil.validateObject(user);
 		User $user = User.find("username=? and status=?", user.username, false).first();
 		if($user != null){
@@ -34,7 +34,7 @@ public class UserService {
 		user.save();
 		UserProfile.save(user);
 		Notify.all(user, "register");
-		return true;
+		return user;
 	}
 	
 	public static boolean resetPassword(long id, String password) throws ParamException, ServiceException{

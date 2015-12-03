@@ -2,10 +2,15 @@ package models.base;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ForeignKey;
+import org.hibernate.annotations.Index;
 
 import play.db.Model;
 import utils.SQLUtil;
@@ -27,10 +32,12 @@ public class Tag extends BaseModel {
 	@Column(columnDefinition="varchar(255) comment '标签颜色'")
     public String tagcolor; 
 	
-	@OneToMany
+	@ManyToMany(cascade=CascadeType.ALL,mappedBy="tags")
+	@ForeignKey(name="null")
 	public List<Post> posts;
 	
-	@OneToMany
+	@ManyToMany(cascade=CascadeType.ALL,mappedBy="tags")
+	@ForeignKey(name="null")
 	public List<Image> images;
 	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {

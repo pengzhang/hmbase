@@ -6,6 +6,7 @@ import controllers.AdminController;
 import models.base.UserProfile;
 import models.data.PageData;
 import models.data.ResponseData;
+import utils.JsonUtil;
 import utils.ParamUtil;
 
 public class AdminUserProfile extends AdminController {
@@ -32,6 +33,6 @@ public class AdminUserProfile extends AdminController {
 	}
 
 	public static void userProfilesData(Integer limit, Integer offset, String search, String sort, String order){
-		renderJSON(UserProfile.findByPageData(offset/limit+1, limit, search, null, sort, order, null));
+		renderJSON(JsonUtil.toJson(UserProfile.findByPageData(offset/limit+1, limit, search, null, sort, order, null),"profile"));
 	}
 }

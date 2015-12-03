@@ -31,7 +31,7 @@ public class ApiController extends Controller {
 	public static void register(){
 		try{
 			User user = ParamUtil.getJsonParams(request.body, User.class);
-			boolean flag = UserService.register(user);
+			boolean flag = UserService.register(user)!=null;
 			renderJSON(ResponseData.response(flag, "注册成功"));
 		}catch(ParamException p){
 			renderJSON(ResponseData.response(false, p.getMessage()));

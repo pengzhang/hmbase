@@ -60,14 +60,13 @@ public class User extends BaseModel {
 	@Column(columnDefinition = "varchar(255) comment '头像'")
 	public String avatar;
 	
-	@Column(columnDefinition = "int comment '类型:0_admin 1_管理员 2_vip 3_普通'")
+	@Column(columnDefinition = "tinyint comment '类型:0_admin 1_管理员 2_vip 3_普通'")
 	public int type = 3;
 	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="user")
 	public UserProfile profile;
 	
 	public static void update(User user){
-		user.password = Crypto.passwordHash(user.password);
 		user.updateDate = new Date();
 		user.save();
 	}

@@ -12,9 +12,10 @@ import models.logs.AccessLog;
 import play.mvc.Controller;
 import play.mvc.With;
 
-@With(ActionInterceptor.class)
-@Login()
+@Check("manager")
+@With(value={ActionInterceptor.class,Secure.class})
 public class AdminController extends Controller {
+	
 	
     public static void index() throws ParseException{
     	renderArgs.put("userTotal", User.count());
@@ -27,6 +28,7 @@ public class AdminController extends Controller {
         render();
     }
     
+    @Check("admin")
     public static void users(){
     	String menu = "user";
     	render(menu);
@@ -52,6 +54,7 @@ public class AdminController extends Controller {
     	render(menu);
     }
     
+    @Check("admin")
     public static void userProfiles(Long user_id){
     	String menu = "user_profile";
     	render(menu,user_id);

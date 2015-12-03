@@ -2,11 +2,15 @@ package controllers.admin;
 
 import java.util.Date;
 
-import controllers.AdminController;
 import models.base.Post;
 import models.data.ResponseData;
+import play.mvc.With;
 import utils.ParamUtil;
+import controllers.ActionInterceptor;
+import controllers.AdminController;
+import controllers.Secure;
 
+@With({ActionInterceptor.class,Secure.class})
 public class AdminPost extends AdminController {
 	
 	public static void createPost(){

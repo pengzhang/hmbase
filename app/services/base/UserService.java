@@ -15,7 +15,7 @@ public class UserService {
 
 	public static User login(String username, String password) throws ParamException, ServiceException{
 		ParamUtil.validateString(username, password);
-		User user = User.find("username=? and password=? and status=?", username, DigestUtils.md5Hex(password), false).first();
+		User user = User.find("username=? and password=? and status=?", username, Crypto.passwordHash(password), false).first();
 		if(user == null){
 			throw new ServiceException("用户名或者密码错误");
 		}

@@ -21,37 +21,9 @@ public class ActionInterceptor extends Controller {
 	@Before
     static void actionAccess()
     {
-		authorize();
-    }
-
-	private static void authorize() {
-		
 		AccessLog.record(request, NumberUtils.toLong(session.get("userId")), false);
-		
-		try {
-			Class controller = Class.forName("controllers."	+ request.action.substring(0, request.action.lastIndexOf(".")));
-			if (controller.isAnnotationPresent(Login.class)) {
-				String[] unless = ((Login) controller.getAnnotation(Login.class)).unless();
-				if (unless != null && unless.length > 0) {
-					if(!Arrays.asList(unless).contains(request.actionMethod)){
-						loginPage();
-					}
-				}else{
-					loginPage();
-				}
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			error();
-		}		
-	}
-
-	private static void loginPage(){
-    	if(session.get("userId") == null){
-    		redirect("/user/login");
-    	}
     }
-    
+
     /**
      * 异常处理
      * @param t

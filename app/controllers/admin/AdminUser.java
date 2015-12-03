@@ -1,19 +1,22 @@
 package controllers.admin;
 
-import java.util.Date;
+import models.base.User;
+import models.data.ResponseData;
 
 import org.apache.commons.lang.StringUtils;
 
-import models.base.User;
-import models.base.UserProfile;
-import models.data.ResponseData;
 import play.data.validation.Valid;
 import play.libs.Crypto;
+import play.mvc.With;
 import services.base.UserService;
 import utils.JsonUtil;
-import utils.ParamUtil;
+import controllers.ActionInterceptor;
 import controllers.AdminController;
+import controllers.Check;
+import controllers.Secure;
 
+@Check("admin")
+@With({ActionInterceptor.class,Secure.class})
 public class AdminUser extends AdminController {
 	
 	public static void create(){
@@ -43,6 +46,9 @@ public class AdminUser extends AdminController {
 		if(StringUtils.isEmpty(user.password)){
 			user.password = password;
 			user.repeatPassword = password;
+		}else{
+			user.password = Crypto.passwordHash(user.password);
+			user.repeatPassword = user.password ;
 		}
 		
 		validation.valid(user);

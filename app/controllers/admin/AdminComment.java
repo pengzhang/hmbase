@@ -2,14 +2,16 @@ package controllers.admin;
 
 import java.util.Date;
 
-import com.google.gson.GsonBuilder;
-
-import controllers.AdminController;
 import models.base.Comment;
 import models.data.PageData;
 import models.data.ResponseData;
+import play.mvc.With;
 import utils.ParamUtil;
+import controllers.ActionInterceptor;
+import controllers.AdminController;
+import controllers.Secure;
 
+@With({ActionInterceptor.class,Secure.class})
 public class AdminComment extends AdminController {
 	
 	public static void createComment(){

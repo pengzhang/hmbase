@@ -7,9 +7,6 @@ GET     /                                       Application.index
 
 
 # User Controller
-GET     /user/login                             UserController.login
-POST    /user/login                             UserController.doLogin
-GET     /user/logout                            UserController.logout
 
 # Assist
 GET     /captcha                                Assist.captcha
@@ -68,6 +65,10 @@ POST    /api/register                           ApiController.register
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
+
+
+# Import Secure routes
+*      /                module:secure
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

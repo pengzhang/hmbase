@@ -3,9 +3,11 @@ package services.base;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 
+import play.libs.Crypto;
 import exceptions.ParamException;
 import exceptions.ServiceException;
 import models.base.User;
+import models.base.UserProfile;
 import modules.notify.Notify;
 import utils.ParamUtil;
 
@@ -28,8 +30,9 @@ public class UserService {
 		if($user != null){
 			throw new ServiceException("用户已存在");
 		}
-		user.password = DigestUtils.md5Hex(user.password);
+		user.password = Crypto.passwordHash(user.password);
 		user.save();
+		UserProfile.save(user);
 		Notify.all(user, "register");
 		return true;
 	}

@@ -1,5 +1,6 @@
 package models.base;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,7 @@ import javax.persistence.Transient;
 
 import models.BaseModel;
 import models.data.PageData;
+import models.data.ResponseData;
 import play.data.validation.Email;
 import play.data.validation.Equals;
 import play.data.validation.Match;
@@ -19,6 +21,7 @@ import play.data.validation.MaxSize;
 import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.db.Model;
+import play.libs.Crypto;
 import utils.SQLUtil;
 import exceptions.ServiceException;
 
@@ -62,6 +65,18 @@ public class User extends BaseModel {
 	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="user",optional=false)
 	public UserProfile profile;
+	
+	public static void update(User user){
+		user.password = Crypto.passwordHash(user.password);
+		user.updateDate = new Date();
+		user.save();
+	}
+	
+	public static void remove(long id){
+		User user = User.findById(id);
+		user.status = true;
+		user.save();
+	}
 	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPage(User.class, page, size, search, searchFields, orderBy, order, where);

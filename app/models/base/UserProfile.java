@@ -60,6 +60,12 @@ public class UserProfile extends BaseModel implements Serializable {
 	@ForeignKey(name="null")
 	public User user;
 	
+	public static void save(User user){
+		UserProfile profile = new UserProfile();
+		profile.user = user;
+		profile.save();
+	}
+	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPage(UserProfile.class, page, size, search, searchFields, orderBy, order, where);
 	}

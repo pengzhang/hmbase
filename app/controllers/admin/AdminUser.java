@@ -9,6 +9,7 @@ import models.base.UserProfile;
 import models.data.ResponseData;
 import play.data.validation.Valid;
 import play.libs.Crypto;
+import services.base.UserService;
 import utils.ParamUtil;
 import controllers.AdminController;
 
@@ -24,19 +25,13 @@ public class AdminUser extends AdminController {
 			validation.keep();
 			create();
 		}
-		user.password = Crypto.passwordHash(user.password);
-		
-		user.save();
-		UserProfile profile = new UserProfile();
-		profile.user = user;
-		profile.save();
+		UserService.register(user);
 		flash.success("创建用户%s成功", user.username);
 		redirect("/admin/users");
 	}
 	
 	public static void modify(Long id){
 		User user = User.findById(id);
-		System.out.println("======" + user.profile);
 		render(user);
 		
 	}
@@ -57,18 +52,14 @@ public class AdminUser extends AdminController {
 	        update(id);
 	    }
 	    
-	    user.password = Crypto.passwordHash(user.password);
-		user.updateDate = new Date();
-		user.save();
+	    User.update(user);
 		flash.success("修改用户%s成功", user.username);
 		modify(id);
 	}
 	
 
 	public static void remove(long id){
-		User user = User.findById(id);
-		user.status = true;
-		user.save();
+		User.remove(id);
 		renderJSON(ResponseData.response(true, "用户信息删除成功"));
 	}
 

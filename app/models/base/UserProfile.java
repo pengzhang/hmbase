@@ -19,6 +19,7 @@ import org.hibernate.annotations.ForeignKey;
 
 import com.google.gson.annotations.Expose;
 
+import play.data.validation.MaxSize;
 import play.db.Model;
 import utils.SQLUtil;
 import exceptions.ServiceException;
@@ -34,9 +35,10 @@ public class UserProfile extends BaseModel implements Serializable {
 	@Column(columnDefinition = "tinyint comment '性别:0_男 1_女'")
 	public boolean gender = false;
 	
+	@MaxSize(value=18,message="身份证号最多18个字符")
 	@Column(name = "card_id", columnDefinition = "varchar(255) comment '身份证号'")
 	public String cardId;
-	
+
 	@Column(columnDefinition = "int comment '级别'")
 	public int level;
 	

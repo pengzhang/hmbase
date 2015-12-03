@@ -1,0 +1,139 @@
+#{extends 'AdminController/admin.html' /} 
+#{set title:'修改用户资料' /}
+#{include 'AdminController/nav.html'/}
+#{include 'AdminController/sidebar.html'/}
+#{set 'moreStyles' }
+	<link href="/public/stylesheets/bootstrap/bootstrap-table.css" rel="stylesheet">
+#{/set}
+
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+			<li class="active">修改用户资料</li>
+		</ol>
+	</div><!--/.row-->
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">修改用户资料</h1>
+		</div>
+	</div><!--/.row-->
+			
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">修改用户资料</div>
+				<div class="panel-body">
+					<div class="toolbar">
+			            #{ifErrors}
+			               <div class="alert alert-danger alert-dismissible" role="alert">
+							  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							  <ul>
+							   #{errors}
+							   	 <li>${error}</li>
+							   #{/errors}
+						      </ul>
+						   </div>
+						#{/ifErrors}
+						#{if flash.success}
+			            <div class="alert alert-success">${flash.success}</div>
+			            #{/if}
+			        </div>
+			        <form action="/admin/users/profile/modify?id=${profile.id}" method="post">
+						    <div class="form-group">
+		                        <label>用户名</label>
+		                        <input type="text" class="form-control" readonly="readonly" name="username" value="${profile.user.username}">
+		                    </div>
+		                    <div class="form-group">
+		                        <label>姓名</label>
+		                        <input type="text" class="form-control" name="profile.realname" placeholder="姓名" value="${profile.realname}">
+		                    </div>
+		                    <div class="form-group">
+		                    	<label class="control-label">性别</label>
+		                    	<div>
+		                    		<label class="radio-inline">
+		                        		<input type="radio"  name="profile.gender" ${profile.gender?'':'checked="checked"'} value="false">男
+			                        </label>
+			                        <label class="radio-inline">
+			                        	<input type="radio"  name="profile.gender" ${profile.gender?'checked="checked"':''} value="true">女
+			                        </label>
+		                    	</div>
+		                    </div>
+		                    <div class="form-group">
+		                        <label>身份证号</label>
+		                        <input type="text" class="form-control" name="profile.cardId" placeholder="身份证号" value="${profile.cardId}">
+		                    </div>
+		                    <div class="form-group">
+		                        <label class="control-label">级别</label>
+		                        <div>
+		                    		<label class="radio-inline">
+		                        		<input type="radio"  name="profile.level" ${profile.level==0?'checked="checked"':''} value="0">Lv 0
+			                        </label>
+			                        <label class="radio-inline">
+			                        	<input type="radio"  name="profile.level" ${profile.level==1?'checked="checked"':''}  value="1">Lv 1
+			                        </label>
+			                        <label class="radio-inline">
+			                        	<input type="radio"  name="profile.level" ${profile.level==2?'checked="checked"':''}  value="2">Lv 2
+			                        </label>
+			                        <label class="radio-inline">
+			                        	<input type="radio"  name="profile.level" ${profile.level==3?'checked="checked"':''}  value="3">Lv 3
+			                        </label>
+		                    	</div>
+		                    </div>
+		                    <div class="form-group">
+		                        <label>公司</label>
+		                        <input type="text" class="form-control" name="profile.company" placeholder="公司" value="${profile.company}">
+		                    </div>
+		                    <div class="form-group">
+		                        <label class="control-label">职位</label>
+		                        <select class="form-control" name="profile.jobtitle">
+		                        	<option ${profile.jobtitle=='程序员'?'selected="selected"':''} value="程序员">程序员</option>
+		                        	<option ${profile.jobtitle=='设计师'?'selected="selected"':''} value="设计师">设计师</option>
+		                        	<option ${profile.jobtitle=='产品经理'?'selected="selected"':''} value="产品经理">产品经理</option>
+		                        	<option ${profile.jobtitle=='运营专员'?'selected="selected"':''} value="运营专员">运营专员</option>
+		                        	<option ${profile.jobtitle=='市场专员'?'selected="selected"':''} value="市场专员">市场专员</option>
+		                        	<option ${profile.jobtitle=='CTO'?'selected="selected"':''} value="CTO">CTO</option>
+		                        	<option ${profile.jobtitle=='CEO'?'selected="selected"':''} value="CEO">CEO</option>
+		                        	<option ${profile.jobtitle=='其他'?'selected="selected"':''} value="其他">其他</option>
+		                        </select>
+		                    </div>
+		                    <div class="form-group">
+		                        <label class="control-label">工作年限</label>
+		                        <select class="form-control" name="profile.workYears">
+		                        	<option ${profile.workYears=='1年'?'selected="selected"':''} value="1年">1年</option>
+		                        	<option ${profile.workYears=='1-3年'?'selected="selected"':''} value="1-3年">1-3年</option>
+		                        	<option ${profile.workYears=='3-5年'?'selected="selected"':''} value="3-5年">3-5年</option>
+		                        	<option ${profile.workYears=='5-10年'?'selected="selected"':''} value="5-10年">5-10年</option>
+		                        	<option ${profile.workYears=='10-15年'?'selected="selected"':''} value="10-15年">10-15年</option>
+		                        	<option ${profile.workYears=='15年以上'?'selected="selected"':''} value="15年以上">15年以上</option>
+		                        </select>
+		                    </div>
+		                    <div class="form-group">
+		                        <label class="control-label">城市</label>
+		                        <select class="form-control" name="profile.city">
+		                        	<option ${profile.city=='北京'?'selected="selected"':''} value="北京">北京</option>
+		                        	<option ${profile.city=='上海'?'selected="selected"':''} value="上海">上海</option>
+		                        	<option ${profile.city=='广州'?'selected="selected"':''} value="广州">广州</option>
+		                        	<option ${profile.city=='深圳'?'selected="selected"':''} value="深圳">深圳</option>
+		                        	<option ${profile.city=='其他'?'selected="selected"':''} value="其他">其他</option>
+		                        </select>
+		                    </div>
+		                    <div class="form-group">
+		                        <label>用户签名</label>
+		                        <textarea class="form-control" name="profile.userSign" placeholder="用户签名" rows="5">${profile.userSign}</textarea>
+		                    </div>
+	                    <div class="form-group">
+	                    	<button type="submit" class="btn btn-primary">提交</button>
+	                    </div>
+			        </form>
+				</div>
+			</div>
+		</div>
+	</div><!--/.row-->
+</div><!--/.main-->
+
+#{set 'moreScripts' }
+#{/set}
+

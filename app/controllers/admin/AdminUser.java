@@ -34,9 +34,8 @@ public class AdminUser extends AdminController {
 	public static void modify(Long id){
 		User user = User.findById(id);
 		render(user);
-		
 	}
-
+	
 	public static void update(Long id){
 		User user = User.findById(id);
 		String password = user.password;
@@ -50,7 +49,7 @@ public class AdminUser extends AdminController {
 	    if(validation.hasErrors()) {
 	        user.refresh();
 	        validation.keep();
-	        update(id);
+	        modify(id);
 	    }
 	    
 	    User.update(user);

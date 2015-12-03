@@ -52,9 +52,9 @@ public class AdminController extends Controller {
     	render(menu);
     }
     
-    public static void userProfiles(){
+    public static void userProfiles(Long user_id){
     	String menu = "user_profile";
-    	render(menu);
+    	render(menu,user_id);
     }
 
 }

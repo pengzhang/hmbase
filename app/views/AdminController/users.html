@@ -45,9 +45,10 @@
 						        <th data-field="mobile"  data-sortable="true">手机号</th>
 						        <th data-field="email"  data-sortable="true" data-formatter="sub20Formatter">邮箱</th>
 						        <th data-field="type"  data-sortable="true" data-formatter="typeFormatter">用户类型</th>
+						        <th data-field="id"  data-sortable="true" data-formatter="profileFormatter">用户资料</th>
 						        <th data-field="status" data-sortable="true" data-formatter="statusFormatter">状态</th>
 						        <th data-field="createDate" data-sortable="true" data-formatter="dateFormatter">创建日期</th>
-						        <th data-field="updateDate" data-sortable="true" data-formatter="dateFormatter">修改日期</th>
+						        <th data-field="updateDate" data-sortable="true" data-visible="false"data-formatter="dateFormatter">修改日期</th>
 						        <th data-field="action"
 				                    data-align="center"
 				                    data-formatter="actionFormatter"
@@ -85,14 +86,8 @@
 				return '<span class="label label-info">普通用户</span>';
 			}
 		}
-		function genderFormatter(value) {
-			if(value){
-				return '<span class="label label-info">女</span>';
-			}
-			return '<span class="label label-info">男</span>';
-		}
-		function levelFormatter(value) {
-			return '<span class="label label-default">LV '+value+'</span>';
+		function profileFormatter(value) {
+			return '<a href="/admin/users/profile?user_id='+value+'">查看资料</span>';
 		}
 		function idFormatter(value) {
 			return '<a href="/admin/users/modify?id='+value+'">'+value+'</span>';
@@ -102,6 +97,10 @@
 				return '<span class="label label-danger">已删除</span>';
 			}
 			return '<span class="label label-success">正常</span>';
+		}
+		function queryParams(params) {
+			$.extend(params);
+		    return params;
 		}
 	</script>
 	<script src="/public/javascripts/bootstrap/bootstrap-table-crud.js"></script>

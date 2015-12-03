@@ -47,11 +47,12 @@ $(function () {
     });
 });
 
-
+/*
 function queryParams(params) {
-	$.extend(params,{'id':2});
+	$.extend(params);
     return params;
 }
+*/
 
 function actionFormatter(value) {
     return [

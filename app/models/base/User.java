@@ -60,7 +60,7 @@ public class User extends BaseModel {
 	@Column(columnDefinition = "int comment '类型:0_admin 1_管理员 2_vip 3_普通'")
 	public int type = 3;
 	
-	@OneToOne(cascade=CascadeType.ALL,mappedBy="user",optional=false)
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="user")
 	public UserProfile profile;
 	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {

@@ -55,8 +55,8 @@ public class UserProfile extends BaseModel implements Serializable {
 	@Column(name = "user_sign", columnDefinition = "varchar(255) comment '用户签名'")
 	public String userSign;
 	
-	@OneToOne(cascade=CascadeType.ALL,optional=true)
-	@JoinColumn(name="uid")
+	@OneToOne(cascade=CascadeType.ALL,optional=false)
+	@JoinColumn(name="userid")
 	@ForeignKey(name="null")
 	public User user;
 	

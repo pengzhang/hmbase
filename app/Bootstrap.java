@@ -1,4 +1,5 @@
 import models.base.User;
+import models.base.UserProfile;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import services.base.UserService;

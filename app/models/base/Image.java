@@ -1,12 +1,15 @@
 package models.base;
 
-import java.util.List;
-
+import java.util.List;import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ForeignKey;
 
 import play.db.Model;
 import utils.SQLUtil;
@@ -28,19 +31,23 @@ public class Image extends BaseModel {
 	@Column(columnDefinition="varchar(1000) comment '图片地址'")
 	public String imageUrl;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	@ForeignKey(name="null")
 	public User user;
 	
-	@OneToMany
+	@ManyToMany(cascade=CascadeType.ALL)
+	@ForeignKey(name="null")
 	public List<Category> categories;
 	
-	@OneToMany
+	@ManyToMany(cascade=CascadeType.ALL)
+	@ForeignKey(name="null")
 	public List<Tag> tags;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="image")
 	public List<Comment> comments;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="image")
 	public List<Social> social;
 
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {

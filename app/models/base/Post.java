@@ -2,17 +2,22 @@ package models.base;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import play.db.Model;
-import utils.SQLUtil;
+import org.hibernate.annotations.ForeignKey;
+
 import exceptions.ServiceException;
 import models.BaseModel;
 import models.data.PageData;
+import play.db.Model;
+import utils.SQLUtil;
 
 @Entity
 @Table(name="post")
@@ -46,22 +51,23 @@ public class Post extends BaseModel {
 	@Column(columnDefinition="tinyint comment '0-普通 1-滚动'")
 	public boolean banner = false;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	@ForeignKey(name="null")
 	public User user;
 	
-	@OneToMany
+	@ManyToMany(cascade=CascadeType.ALL)
+	@ForeignKey(name="null")
 	public List<Category> categories;
 	
-	@OneToMany
-	public List<Image> images;
-	
-	@OneToMany
+	@ManyToMany(cascade=CascadeType.ALL)
+	@ForeignKey(name="null")
 	public List<Tag> tags;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="post")
 	public List<Comment> comments;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="post")
 	public List<Social> social;
 
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {

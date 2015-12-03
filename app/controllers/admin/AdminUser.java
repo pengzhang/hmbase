@@ -9,6 +9,7 @@ import models.base.UserProfile;
 import models.data.ResponseData;
 import play.data.validation.Valid;
 import play.libs.Crypto;
+import utils.JsonUtil;
 import utils.ParamUtil;
 import controllers.AdminController;
 
@@ -73,6 +74,6 @@ public class AdminUser extends AdminController {
 	}
 
 	public static void usersData(Integer limit, Integer offset, String search, String sort, String order){
-		renderJSON(User.findByPageData(offset/limit+1, limit, search, null, sort, order, null));
+		renderJSON(JsonUtil.toJson(User.findByPageData(offset/limit+1, limit, search, null, sort, order, null),"user"));
 	}
 }

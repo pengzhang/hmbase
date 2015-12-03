@@ -2,17 +2,22 @@ package models.base;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import play.db.Model;
-import utils.SQLUtil;
+import org.hibernate.annotations.ForeignKey;
+
 import exceptions.ServiceException;
 import models.BaseModel;
 import models.data.PageData;
+import play.db.Model;
+import utils.SQLUtil;
 
 @Entity
 @Table(name="category")
@@ -31,16 +36,20 @@ public class Category extends BaseModel {
 	@Column(columnDefinition="tinyint comment '0-不推荐 1-推荐'")
 	public boolean recommend = false;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="pid")
+	@ForeignKey(name="null")
 	public Category parent;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="parent")
 	public List<Category> children;
 	
-	@OneToMany
+	@ManyToMany(cascade=CascadeType.ALL,mappedBy="categories")
+	@ForeignKey(name="null")
 	public List<Post> posts;
 	
-	@OneToMany
+	@ManyToMany(cascade=CascadeType.ALL,mappedBy="categories")
+	@ForeignKey(name="null")
 	public List<Image> images;
 	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {

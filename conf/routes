@@ -29,9 +29,11 @@ POST    /admin/users/profile/modify             admin.AdminUserProfile.update
 GET     /admin/users/profile/data               admin.AdminUserProfile.userProfilesData
 
 GET     /admin/categories                       AdminController.categories
-POST    /admin/categories/create                admin.AdminCategory.createCategory
-POST    /admin/categories/modify                admin.AdminCategory.modifyCategory
-GET     /admin/categories/remove                admin.AdminCategory.removeCategory
+GET     /admin/categories/create                admin.AdminCategory.create
+POST    /admin/categories/create                admin.AdminCategory.save
+GET     /admin/categories/modify                admin.AdminCategory.modify
+POST    /admin/categories/modify                admin.AdminCategory.update
+GET     /admin/categories/remove                admin.AdminCategory.remove
 GET     /admin/categories/data                  admin.AdminCategory.categoriesData
 
 GET     /admin/tags                             AdminController.tags

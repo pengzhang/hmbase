@@ -12,7 +12,7 @@ public class Security extends Secure.Security {
 		try {
 			User user = UserService.login(username, password);
 			if (user != null) {
-				Cache.set("user_" + username, user);
+//				Cache.set("user_" + username, user);
 				return true;
 			}
 			return false;
@@ -23,7 +23,8 @@ public class Security extends Secure.Security {
 	}
 
 	static boolean check(String profile) {
-		User user = (User) Cache.get("user_" + connected());
+//		User user = (User) Cache.get("user_" + connected());
+		User user = User.find("username", connected()).first();
 		if (user == null) {
 			return false;
 		}
@@ -39,7 +40,8 @@ public class Security extends Secure.Security {
 	}
 
 	static void onAuthenticated() {
-		User user = (User) Cache.get("user_" + connected());
+//		User user = (User) Cache.get("user_" + connected());
+		User user = User.find("username", connected()).first();
 		if (user.type == 0 || user.type == 1) {
 			redirect("/admin");
 		} else {

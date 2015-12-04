@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -16,6 +17,8 @@ import org.hibernate.annotations.ForeignKey;
 import exceptions.ServiceException;
 import models.BaseModel;
 import models.data.PageData;
+import play.data.validation.Match;
+import play.data.validation.Required;
 import play.db.Model;
 import utils.SQLUtil;
 
@@ -24,12 +27,14 @@ import utils.SQLUtil;
 @org.hibernate.annotations.Table(comment="分类管理", appliesTo = "category")
 public class Category extends BaseModel {
     
+	@Required(message="分类名称必须填写")
 	@Column(nullable=false,columnDefinition="varchar(255) comment '分类名称'")
     public String category;  
 	
 	@Column(columnDefinition="varchar(255) comment '分类描述'")
     public String description;  
 	
+	@Match(value="[0-9]{1}",message="分类顺序范围0-9")
 	@Column(name="category_order",columnDefinition="int comment '分类排序,默认:0'")
     public int categoryOrder = 0;    
 	
@@ -41,14 +46,14 @@ public class Category extends BaseModel {
 	@ForeignKey(name="null")
 	public Category parent;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="parent")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="parent",fetch=FetchType.LAZY)
 	public List<Category> children;
 	
-	@ManyToMany(cascade=CascadeType.ALL,mappedBy="categories")
+	@ManyToMany(cascade=CascadeType.ALL,mappedBy="categories",fetch=FetchType.LAZY)
 	@ForeignKey(name="null")
 	public List<Post> posts;
 	
-	@ManyToMany(cascade=CascadeType.ALL,mappedBy="categories")
+	@ManyToMany(cascade=CascadeType.ALL,mappedBy="categories",fetch=FetchType.LAZY)
 	@ForeignKey(name="null")
 	public List<Image> images;
 	

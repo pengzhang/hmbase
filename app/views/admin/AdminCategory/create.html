@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">父分类</label>
-                        <select class="form-control" name="category.pid">
+                        <select class="form-control" name="category.parent">
                         	#{list items:categories, as:'category'}
 	                        	#{if category}
 	                        		<option ${category.id==flash['category.id']?'selected="selected"':''} value="${category.id}">${category.category}</option>

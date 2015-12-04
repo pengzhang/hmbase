@@ -10,6 +10,7 @@ import models.base.Category;
 import models.data.ResponseData;
 import play.data.validation.Valid;
 import play.mvc.With;
+import utils.JsonUtil;
 import utils.ParamUtil;
 
 @With({ActionInterceptor.class,Secure.class})
@@ -55,6 +56,6 @@ public class AdminCategory extends AdminController {
 	}
 
 	public static void categoriesData(Integer limit, Integer offset, String search, String sort, String order){
-		renderJSON(Category.findByPageData(offset/limit+1, limit, search, null, sort, order, null));
+		renderJSON(JsonUtil.toJson(Category.findByPageData(offset/limit+1, limit, search, null, sort, order, null),"children"));
 	}
 }

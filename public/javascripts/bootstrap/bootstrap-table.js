@@ -213,13 +213,17 @@
 
     var getItemField = function (item, field) {
         var value = item;
-
         if (typeof field !== 'string' || item.hasOwnProperty(field)) {
             return item[field];
         }
         var props = field.split('.');
         for (var p in props) {
-            value = value[props[p]];
+        	if(value[props[p]]){
+        		value = value[props[p]];
+        	}else{
+        		value="-";
+        	}
+            
         }
         return value;
     };

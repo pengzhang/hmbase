@@ -18,7 +18,7 @@ public class JsonUtil {
 	 */
 	public static String toJson(Object obj,String...excludeFields){
 		ExclusionStrategy excludeStrategy = new SetterExclusionStrategy(excludeFields);
-		Gson gson = new GsonBuilder().setExclusionStrategies(excludeStrategy)
+		Gson gson = new GsonBuilder().serializeNulls().setExclusionStrategies(excludeStrategy)
 				.create();
         return gson.toJson(obj);
 	}

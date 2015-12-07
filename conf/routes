@@ -43,9 +43,11 @@ GET     /admin/tags/remove                      admin.AdminTag.removeTag
 GET     /admin/tags/data                        admin.AdminTag.TagData
 
 GET     /admin/posts                            AdminController.posts
-POST    /admin/posts/create                     admin.AdminPost.createPost
-POST    /admin/posts/modify                     admin.AdminPost.modifyPost
-GET     /admin/posts/remove                     admin.AdminPost.removePost
+POST    /admin/posts/create                     admin.AdminPost.create
+POST    /admin/posts/save                     	admin.AdminPost.save
+POST    /admin/posts/modify                     admin.AdminPost.modify
+POST    /admin/posts/update                     admin.AdminPost.update
+GET     /admin/posts/remove                     admin.AdminPost.remove
 GET     /admin/posts/data                       admin.AdminPost.postsData
 
 GET     /admin/comments                         AdminController.comments

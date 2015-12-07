@@ -63,6 +63,13 @@ public class Category extends BaseModel {
 		category.save();
 	}
 	
+	public static void remove(Long id){
+		Category category = Category.findById(id);
+		category.updateDate = new Date();
+		category.status = true;
+		category.save();
+	}
+	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPage(Category.class, page, size, search, searchFields, orderBy, order, where);
 	}

@@ -1,0 +1,106 @@
+#{extends 'AdminController/admin.html' /} 
+#{set title:'文章列表' /}
+#{include 'AdminController/nav.html'/}
+#{include 'AdminController/sidebar.html'/}
+#{set 'moreStyles' }
+	<link href="/public/stylesheets/bootstrap/bootstrap-table.css" rel="stylesheet">
+#{/set}
+
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+			<li class="active">文章列表</li>
+		</ol>
+	</div><!--/.row-->
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">文章列表</h1>
+		</div>
+	</div><!--/.row-->
+			
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">全部文章列表</div>
+				<div class="panel-body">
+		            <div class="toolbar">
+						<a class="btn btn-primary" href="/admin/posts/create">创建文章</a>
+						#{if flash.success}
+			            <span class="alert alert-success">${flash.success}</span>
+			            #{/if}
+			            #{else}
+			            <span class="alert"></span>
+			            #{/else}
+			        </div>
+					<table id="table" data-toggle="table" data-query-params="queryParams" data-toolbar=".toolbar" data-side-pagination="server" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="createDate" data-sort-order="desc">
+					    <thead>
+					    <tr>
+				       		<th data-field="state" data-checkbox="true" ></th>
+					        <th data-field="id" data-sortable="true">文章ID</th>
+					        <th data-field="coverImage"  data-sortable="true">封面图</th>
+					        <th data-field="title"  data-sortable="true" data-formatter="sub10Formatter">文章标题</th>
+					        <th data-field="subtitle"  data-sortable="true" data-formatter="sub10Formatter">文章子标题</th>
+					        <th data-field="introduction"  data-sortable="true" data-formatter="sub20Formatter">文章简介</th>
+					        <th data-field="recommend"  data-sortable="true" data-formatter="recommendFormatter">推荐</th>
+					        <th data-field="hot"  data-sortable="true" data-formatter="hotFormatter">热文</th>
+					        <th data-field="banner"  data-sortable="true" data-formatter="bannerFormatter">滚动</th>
+					        <th data-field="user.username"  data-sortable="true">作者</th>
+					        <th data-field="status" data-sortable="true" data-formatter="statusFormatter">状态</th>
+					        <th data-field="createDate" data-sortable="true" data-formatter="dateFormatter">创建日期</th>
+					        <th data-field="updateDate" data-sortable="true" data-formatter="dateFormatter">修改日期</th>
+					        <th data-field="action"
+			                    data-align="center"
+			                    data-formatter="actionFormatter"
+			                    data-events="actionEvents">操作</th>
+					    </tr>
+					    </thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div><!--/.row-->
+</div><!--/.main-->
+
+#{set 'moreScripts' }
+	<script src="/public/javascripts/bootstrap/bootstrap-table.js"></script>
+	<script src="/public/javascripts/datetime/date-format.js"></script>
+	<script type="text/javascript">
+		var API_URL_UPDATE = '/admin/categories/modify?id=';
+		var API_URL_DELETE = '/admin/categories/remove?id=';
+		var API_URL_GET = '/admin/categories/data';
+		function recommendFormatter(value) {
+			if(value){
+				return '<span class="label label-warning">推荐</span>';
+			}
+			return '<span class="label label-info">普通</span>';
+		}
+		function hotFormatter(value) {
+			if(value){
+				return '<span class="label label-warning">热文</span>';
+			}
+			return '<span class="label label-info">普通</span>';
+		}
+		
+		function bannerFormatter(value) {
+			if(value){
+				return '<span class="label label-warning">滚动</span>';
+			}
+			return '<span class="label label-info">普通</span>';
+		}
+		function statusFormatter(value) {
+			if(value){
+				return '<span class="label label-danger">已删除</span>';
+			}
+			return '<span class="label label-success">正常</span>';
+		}
+		function queryParams(params) {
+			$.extend(params);
+		    return params;
+		}
+	</script>
+	<script src="/public/javascripts/bootstrap/bootstrap-table-crud.js"></script>
+#{/set}
+

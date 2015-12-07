@@ -60,10 +60,7 @@ public class AdminCategory extends AdminController {
 	}
 
 	public static void remove(long id){
-		Category category = Category.findById(id);
-		category.updateDate = new Date();
-		category.status = true;
-		category.save();
+		Category.remove(id);
 		renderJSON(ResponseData.response(true, "分类删除成功"));
 	}
 

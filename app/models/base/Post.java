@@ -1,5 +1,6 @@
 package models.base;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -69,6 +70,17 @@ public class Post extends BaseModel {
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="post")
 	public List<Social> social;
+	
+	public static void update(Post post){
+		post.updateDate = new Date();
+		post.save();
+	}
+	
+	public static void remove(long id){
+		Post post = Post.findById(id);
+		post.status = true;
+		post.save();
+	}
 
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPage(Post.class, page, size, search, searchFields, orderBy, order, where);

@@ -32,13 +32,13 @@ public class Assist extends Controller {
 	 * 图片上传
 	 * @param upload_file
 	 */
-	public static void upload(File upload_file) {
+	public static void upload(File file) {
 
 		final ImageUpload upload = new ImageUpload();
 		try {
 			upload.file = new Blob();
-			upload.name = upload_file.getName();
-			upload.file.set(new FileInputStream(upload_file), MimeTypes.getContentType(upload_file.getName()));
+			upload.name = file.getName();
+			upload.file.set(new FileInputStream(file), MimeTypes.getContentType(file.getName()));
 			upload.save();
 			renderJSON(new Simditor(true, "upload success", ImageServerDomain + "/upload/" + upload.file.getUUID()));
 

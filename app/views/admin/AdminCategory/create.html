@@ -39,40 +39,40 @@
 						#{/ifErrors}
 			        </div>
 			        <form action="/admin/categories/create" method="post">
-				    <div class="form-group">
-                        <label>分类名称</label>
-                        <input type="text" class="form-control" name="category.category" placeholder="分类名称" value="${flash['category.category']}">
-                    </div>
-                    <div class="form-group">
-                        <label>分类描述</label>
-                        <input type="text" class="form-control" name="category.description" placeholder="分类描述" value="${flash['category.description']}">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">父分类</label>
-                        <select class="form-control" name="category.parent.id">
-                        	<option value="">顶级</option>
-                        	#{list items:categories, as:'category'}
-	                        	#{if category}
-	                        		<option ${category.id==flash['category.id']?'selected="selected"':''} value="${category.id}">${category.category}</option>
-	                        	#{/if}
-                        	#{/list}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>分类排序</label>
-                        <input type="text" class="form-control" name="category.categoryOrder" placeholder="分类排序" value="${flash['category.categoryOrder']}">
-                    </div>
-                    <div class="form-group">
-                        <label>推荐</label>
-                    	<div>
-                    		<label class="radio-inline">
-                        		<input type="radio"  name="category.recommend" ${flash['category.recommend']?'':'checked'} value="true">推荐
-	                        </label>
-	                        <label class="radio-inline">
-	                        	<input type="radio"  name="category.recommend" ${flash['category.recommend']==null?'checked':''} ${flash['category.recommend']?'checked':''} value="false">普通
-	                        </label>
-                    	</div>
-                    </div>
+					    <div class="form-group">
+	                        <label>分类名称</label>
+	                        <input type="text" class="form-control" name="category.category" placeholder="分类名称" value="${flash['category.category']}">
+	                    </div>
+	                    <div class="form-group">
+	                        <label>分类描述</label>
+	                        <input type="text" class="form-control" name="category.description" placeholder="分类描述" value="${flash['category.description']}">
+	                    </div>
+	                    <div class="form-group">
+	                        <label class="control-label">父分类</label>
+	                        <select class="form-control" name="category.parent.id">
+	                        	<option value="">顶级</option>
+	                        	#{list items:categories, as:'category'}
+		                        	#{if category}
+		                        		<option ${category.id==flash['category.id']?'selected="selected"':''} value="${category.id}">${category.category}</option>
+		                        	#{/if}
+	                        	#{/list}
+	                        </select>
+	                    </div>
+	                    <div class="form-group">
+	                        <label>分类排序</label>
+	                        <input type="text" class="form-control" name="category.categoryOrder" placeholder="分类排序" value="${flash['category.categoryOrder']}">
+	                    </div>
+	                    <div class="form-group">
+	                        <label>推荐</label>
+	                    	<div>
+	                    		<label class="radio-inline">
+	                        		<input type="radio"  name="category.recommend" ${flash['category.recommend']?'':'checked'} value="true">推荐
+		                        </label>
+		                        <label class="radio-inline">
+		                        	<input type="radio"  name="category.recommend" ${flash['category.recommend']==null?'checked':''} ${flash['category.recommend']?'checked':''} value="false">普通
+		                        </label>
+	                    	</div>
+	                    </div>
 	                    <div class="form-group">
 	                    	<button type="submit" class="btn btn-primary">提交</button>
 	                    </div>

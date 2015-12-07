@@ -55,6 +55,15 @@ public class Security extends Secure.Security {
 
 	static void onDisconnected() {
 	}
+	
+	public static String connected() {
+		return session.get("username");
+	}
+	
+	public static boolean isConnected() {
+		return session.contains("username");
+	}
+
 
 	private static String getUserType(int type) {
 		switch (type) {

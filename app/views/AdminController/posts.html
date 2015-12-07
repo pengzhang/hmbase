@@ -40,7 +40,8 @@
 					    <tr>
 				       		<th data-field="state" data-checkbox="true" ></th>
 					        <th data-field="id" data-sortable="true">文章ID</th>
-					        <th data-field="coverImage"  data-sortable="true">封面图</th>
+					        <th data-field="coverImage"  data-sortable="true" data-formatter="imageFormatter">封面图</th>
+					        <th data-field="categories"  data-sortable="true" data-formatter="categoryFormatter">文章分类</th>
 					        <th data-field="title"  data-sortable="true" data-formatter="sub10Formatter">文章标题</th>
 					        <th data-field="subtitle"  data-sortable="true" data-formatter="sub10Formatter">文章子标题</th>
 					        <th data-field="introduction"  data-sortable="true" data-formatter="sub20Formatter">文章简介</th>
@@ -50,7 +51,7 @@
 					        <th data-field="user.username"  data-sortable="true">作者</th>
 					        <th data-field="status" data-sortable="true" data-formatter="statusFormatter">状态</th>
 					        <th data-field="createDate" data-sortable="true" data-formatter="dateFormatter">创建日期</th>
-					        <th data-field="updateDate" data-sortable="true" data-formatter="dateFormatter">修改日期</th>
+					        <th data-field="updateDate" data-sortable="true" data-visible="false" data-formatter="dateFormatter">修改日期</th>
 					        <th data-field="action"
 			                    data-align="center"
 			                    data-formatter="actionFormatter"
@@ -95,6 +96,20 @@
 				return '<span class="label label-danger">已删除</span>';
 			}
 			return '<span class="label label-success">正常</span>';
+		}
+		function imageFormatter(value) {
+			if(value){
+				return '<img class="thumbnail" src="'+value+'"/>';
+			}
+		}
+		function categoryFormatter(value) {
+			if(value){
+				var category = '';
+				$.each(value,function(name,item){
+					category += item.category.substring(0,10)+"<br/>";
+				});
+				return category; 
+			}
 		}
 		function queryParams(params) {
 			$.extend(params);

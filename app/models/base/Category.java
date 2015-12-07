@@ -1,5 +1,6 @@
 package models.base;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -57,6 +58,11 @@ public class Category extends BaseModel {
 	@ForeignKey(name="null")
 	public List<Image> images;
 	
+	public static void update(Category category) {
+		category.updateDate = new Date();
+		category.save();
+	}
+	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPage(Category.class, page, size, search, searchFields, orderBy, order, where);
 	}
@@ -71,5 +77,4 @@ public class Category extends BaseModel {
 				+ ", recommend=" + recommend + ", parent=" + parent + ", children=" + children + ", posts=" + posts
 				+ ", images=" + images + "]";
 	}
-	
 }

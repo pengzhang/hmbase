@@ -50,6 +50,7 @@
                     <div class="form-group">
                         <label class="control-label">父分类</label>
                         <select class="form-control" name="category.parent.id">
+                        	<option value="">顶级</option>
                         	#{list items:categories, as:'category'}
 	                        	#{if category}
 	                        		<option ${category.id==flash['category.id']?'selected="selected"':''} value="${category.id}">${category.category}</option>
@@ -65,7 +66,7 @@
                         <label>推荐</label>
                     	<div>
                     		<label class="radio-inline">
-                        		<input type="radio"  name="category.recommend" ${flash['category.recommend']?'checked':''} value="true">推荐
+                        		<input type="radio"  name="category.recommend" ${flash['category.recommend']?'':'checked'} value="true">推荐
 	                        </label>
 	                        <label class="radio-inline">
 	                        	<input type="radio"  name="category.recommend" ${flash['category.recommend']==null?'checked':''} ${flash['category.recommend']?'checked':''} value="false">普通

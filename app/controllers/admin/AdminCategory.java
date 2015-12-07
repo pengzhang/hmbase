@@ -3,12 +3,16 @@ package controllers.admin;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import controllers.ActionInterceptor;
 import controllers.AdminController;
 import controllers.Secure;
 import models.base.Category;
+import models.base.User;
 import models.data.ResponseData;
 import play.data.validation.Valid;
+import play.libs.Crypto;
 import play.mvc.With;
 import utils.JsonUtil;
 import utils.ParamUtil;
@@ -21,8 +25,7 @@ public class AdminCategory extends AdminController {
 		render(categories);
 	}
 	
-	public static void save(@Valid Category category){
-		System.out.println(category);
+	public static void save(@Valid(message="请检查分类信息") Category category){
 		if(validation.hasErrors()){
 			params.flash();
 			validation.keep();
@@ -33,18 +36,27 @@ public class AdminCategory extends AdminController {
 		redirect("/admin/categories");
 	}
 
-	public static void modifyCategory(long id){
+	public static void modify(long id){
 		Category category = Category.findById(id);
-		ParamUtil.getEditParams(request.body);
-		category.edit(params.getRootParamNode(), "");
-		System.out.println(category);
-		category.updateDate = new Date();
-		category.save();
-		renderJSON(ResponseData.response(true, "分类修改成功"));
+		List<Category> categories = Category.findAll();
+		render(category,categories);
+		
 	}
 	
-	public static void update(){
+	public static void update(Long id){
+		Category category  = Category.findById(id);
 		
+		category.edit(params.getRootParamNode(), "category");
+		validation.valid(category);
+	    if(validation.hasErrors()) {
+	    	category.refresh();
+	        validation.keep();
+	        modify(id);
+	    }
+	    
+	    Category.update(category);
+		flash.success("修改分类%s成功", category.category);
+		modify(id);
 	}
 
 	public static void remove(long id){

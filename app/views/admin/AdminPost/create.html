@@ -95,7 +95,7 @@
 		                        </label>
 	                    	</div>
 	                    </div>
-	                    <input type="hidden" id="draft" name="post.draft" value="false">
+	                    <input type="hidden" id="draft" name="post.draft" value="true">
 	                    <div class="form-group">
 	                    	<button type="submit" class="btn btn-primary">直接发布</button>
 	                    	<button id="save" type="submit" class="btn btn-primary">保存草稿</button>
@@ -149,7 +149,7 @@
 <script type="text/javascript">
   $(function() {
 	  $('#save').click(function(){
-		  $('#draft').value('true');
+		  $('#draft').val('false');
 		  $('form').submit();
 	  });
   });

@@ -40,6 +40,12 @@ public class AdminController extends Controller {
     }
     
     public static void posts(){
+    	renderArgs.put("postTotal", Post.count());
+    	renderArgs.put("publishTotal", Post.count("draft",true));
+    	renderArgs.put("draftTotal", Post.count("draft",false));
+    	renderArgs.put("recommendTotal", Post.count("recommend",true));
+    	renderArgs.put("hotTotal", Post.count("hot",true));
+    	renderArgs.put("removeTotal", Post.count("status",true));
     	String menu = "post";
     	render(menu);
     }

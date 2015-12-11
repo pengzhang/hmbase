@@ -1,7 +1,11 @@
 package controllers;
 
 import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
+
+import org.apache.commons.lang.time.DateUtils;
 
 import annotation.Login;
 import models.base.Comment;
@@ -41,6 +45,9 @@ public class AdminController extends Controller {
     
     public static void posts(){
     	renderArgs.put("postTotal", Post.count());
+    	Date start = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
+    	Date end = DateUtils.truncate(DateUtils.addDays(new Date(), 1), Calendar.DAY_OF_MONTH);
+    	renderArgs.put("todayTotal", Post.count("createDate>? and createDate<?",start,end));
     	renderArgs.put("publishTotal", Post.count("draft",true));
     	renderArgs.put("draftTotal", Post.count("draft",false));
     	renderArgs.put("recommendTotal", Post.count("recommend",true));

@@ -20,7 +20,7 @@ public class Bootstrap extends Job {
 		User user = new User();
 		user.username = "admin";
 		user.password = "admin";
-		user.type = 1;
+		user.type = 0;
 		UserService.register(user);
 		}
 	}

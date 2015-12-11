@@ -17,6 +17,7 @@ import org.hibernate.annotations.ForeignKey;
 import exceptions.ServiceException;
 import models.BaseModel;
 import models.data.PageData;
+import play.data.validation.Required;
 import play.db.Model;
 import utils.SQLUtil;
 
@@ -25,6 +26,7 @@ import utils.SQLUtil;
 @org.hibernate.annotations.Table(comment="内容管理", appliesTo = "post")
 public class Post extends BaseModel {
 	
+	@Required(message="文章标题不能为空")
 	@Column(nullable=false,columnDefinition="varchar(255) comment '标题'")
 	public String title;
 	

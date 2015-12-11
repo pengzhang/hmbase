@@ -32,7 +32,7 @@ public class AdminPost extends AdminController {
 		render(categories);
 	}
 	
-	public static void save(@Valid(message="请检查您的文章内容") Post post){
+	public static void save(@Valid(message="请检查") Post post){
 		if(validation.hasErrors()){
 			params.flash();
 			validation.keep();
@@ -52,7 +52,7 @@ public class AdminPost extends AdminController {
 	
 	public static void update(long id){
 		Post post = Post.findById(id);
-		
+		System.out.println("post=====================" + post);
 		post.edit(params.getRootParamNode(), "post");
 		validation.valid(post);
 	    if(validation.hasErrors()) {

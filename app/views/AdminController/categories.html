@@ -29,10 +29,10 @@
 		            <div class="toolbar">
 						<a class="btn btn-primary" href="/admin/categories/create">创建分类</a>
 						#{if flash.success}
-			            <span class="alert alert-success">${flash.success}</span>
+			            	<span class="alert alert-success">${flash.success}</span>
 			            #{/if}
 			            #{else}
-			            <span class="alert"></span>
+			            	<span class="alert"></span>
 			            #{/else}
 			        </div>
 					<table id="table" data-toggle="table" data-query-params="queryParams" data-toolbar=".toolbar" data-side-pagination="server" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="createDate" data-sort-order="desc">
@@ -47,7 +47,7 @@
 						        <th data-field="recommend"  data-sortable="true" data-formatter="recommendFormatter">推荐</th>
 						        <th data-field="status" data-sortable="true" data-formatter="statusFormatter">状态</th>
 						        <th data-field="createDate" data-sortable="true" data-formatter="dateFormatter">创建日期</th>
-						        <th data-field="updateDate" data-sortable="true" data-formatter="dateFormatter">修改日期</th>
+						        <th data-field="updateDate" data-sortable="true" data-visible="false" data-formatter="dateFormatter">修改日期</th>
 						        <th data-field="action"
 				                    data-align="center"
 				                    data-formatter="actionFormatter"

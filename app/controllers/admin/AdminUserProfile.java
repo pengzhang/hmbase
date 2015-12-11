@@ -1,12 +1,13 @@
 package controllers.admin;
 
-import models.base.UserProfile;
-import play.mvc.With;
-import utils.JsonUtil;
 import controllers.ActionInterceptor;
 import controllers.AdminController;
 import controllers.Check;
 import controllers.Secure;
+import models.base.UserProfile;
+import models.data.PageData;
+import play.mvc.With;
+import utils.JsonUtil;
 
 @Check("admin")
 @With({ActionInterceptor.class,Secure.class})
@@ -33,6 +34,7 @@ public class AdminUserProfile extends AdminController {
 	}
 	
 	public static void userProfilesData(Long user_id,Integer limit, Integer offset, String search, String sort, String order){
-		renderJSON(JsonUtil.toJson(UserProfile.findByPageData(offset/limit+1, limit, search, null, sort, order, user_id!=null?"user.id="+user_id:null),"profile"));
+		PageData pageData = UserProfile.findByPageData(offset/limit+1, limit, search, null, sort, order, user_id!=null?"user.id="+user_id:null);
+		renderJSON(JsonUtil.toJson(pageData,"profile"));
 	}
 }

@@ -1,19 +1,19 @@
 package controllers.admin;
 
-import models.base.User;
-import models.data.ResponseData;
-
 import org.apache.commons.lang.StringUtils;
 
+import controllers.ActionInterceptor;
+import controllers.AdminController;
+import controllers.Check;
+import controllers.Secure;
+import models.base.User;
+import models.data.PageData;
+import models.data.ResponseData;
 import play.data.validation.Valid;
 import play.libs.Crypto;
 import play.mvc.With;
 import services.base.UserService;
 import utils.JsonUtil;
-import controllers.ActionInterceptor;
-import controllers.AdminController;
-import controllers.Check;
-import controllers.Secure;
 
 @Check("admin")
 @With({ActionInterceptor.class,Secure.class})
@@ -70,6 +70,7 @@ public class AdminUser extends AdminController {
 	}
 
 	public static void usersData(Integer limit, Integer offset, String search, String sort, String order){
-		renderJSON(JsonUtil.toJson(User.findByPageData(offset/limit+1, limit, search, null, sort, order, null),"user"));
+		PageData pageData = User.findByPageData(offset/limit+1, limit, search, null, sort, order, null);
+		renderJSON(JsonUtil.toJson(pageData,"user"));
 	}
 }

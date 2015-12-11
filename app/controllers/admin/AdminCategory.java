@@ -1,21 +1,16 @@
 package controllers.admin;
 
-import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
 
 import controllers.ActionInterceptor;
 import controllers.AdminController;
 import controllers.Secure;
 import models.base.Category;
-import models.base.User;
+import models.data.PageData;
 import models.data.ResponseData;
 import play.data.validation.Valid;
-import play.libs.Crypto;
 import play.mvc.With;
 import utils.JsonUtil;
-import utils.ParamUtil;
 
 @With({ActionInterceptor.class,Secure.class})
 public class AdminCategory extends AdminController {
@@ -65,6 +60,7 @@ public class AdminCategory extends AdminController {
 	}
 
 	public static void categoriesData(Integer limit, Integer offset, String search, String sort, String order){
-		renderJSON(JsonUtil.toJson(Category.findByPageData(offset/limit+1, limit, search, null, sort, order, null),"children"));
+		PageData pageData = Category.findByPageData(offset/limit+1, limit, search, null, sort, order, null);
+		renderJSON(JsonUtil.toJson(pageData,"children"));
 	}
 }

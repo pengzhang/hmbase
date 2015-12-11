@@ -57,7 +57,7 @@ function queryParams(params) {
 function actionFormatter(value) {
     return [
         '<a class="update" style="color: #333;margin-right: 5px;" href="javascript:" title="修改"><i class="glyphicon glyphicon-edit"></i></a>',
-        '<a class="remove" style="color: red;margin-left: 5px;" href="javascript:" title="删除"><i class="glyphicon glyphicon-remove-circle"></i></a>',
+        '<a class="remove" style="color: red;margin-left: 5px;" href="javascript:" title="删除"><i class="glyphicon glyphicon-remove-circle"></i></a>'
     ].join('');
 }
 

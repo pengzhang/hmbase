@@ -2,18 +2,19 @@ package controllers.admin;
 
 import java.util.List;
 
+import controllers.ActionInterceptor;
+import controllers.AdminController;
+import controllers.Secure;
+import controllers.Security;
 import models.base.Category;
 import models.base.Post;
 import models.base.User;
+import models.data.PageData;
 import models.data.ResponseData;
 import play.data.validation.Valid;
 import play.mvc.Before;
 import play.mvc.With;
 import utils.JsonUtil;
-import controllers.ActionInterceptor;
-import controllers.AdminController;
-import controllers.Secure;
-import controllers.Security;
 
 @With({ActionInterceptor.class,Secure.class})
 public class AdminPost extends AdminController {
@@ -52,7 +53,6 @@ public class AdminPost extends AdminController {
 	
 	public static void update(long id){
 		Post post = Post.findById(id);
-		System.out.println("post=====================" + post);
 		post.edit(params.getRootParamNode(), "post");
 		validation.valid(post);
 	    if(validation.hasErrors()) {
@@ -72,6 +72,7 @@ public class AdminPost extends AdminController {
 	}
 
 	public static void PostsData(Integer limit, Integer offset, String search, String sort, String order){
-		renderJSON(JsonUtil.toJson(Post.findByPageData(offset/limit+1, limit, search, null, sort, order, null),"posts","post","parent","children","profile"));
+		PageData pageData = Post.findByPageData(offset/limit+1, limit, search, null, sort, order, null);
+		renderJSON(JsonUtil.toJson(pageData,"posts","post","parent","children","profile"));
 	}
 }

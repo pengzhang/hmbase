@@ -28,7 +28,12 @@
 				<div class="panel-body">
 					<p class="toolbar">
 						<a class="create btn btn-primary" href="javascript:void(0);">创建评论</a>
-			            <span class="alert"></span>
+			            #{if flash.success}
+			            	<span class="alert alert-success">${flash.success}</span>
+			            #{/if}
+			            #{else}
+			            	<span class="alert"></span>
+			            #{/else}
 			        </p>
 					<table id="table" data-toggle="table" data-query-params="queryParams" data-toolbar=".toolbar" data-side-pagination="server" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="createDate" data-sort-order="desc">
 					    <thead>

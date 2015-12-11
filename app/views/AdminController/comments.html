@@ -27,21 +27,26 @@
 				<div class="panel-heading">全部评论列表</div>
 				<div class="panel-body">
 					<p class="toolbar">
-						<a class="create btn btn-primary" href="javascript:void(0);">创建评论</a>
-			            <span class="alert"></span>
+			            #{if flash.success}
+			            	<span class="alert alert-success">${flash.success}</span>
+			            #{/if}
+			            #{else}
+			           		<span class="alert"></span>
+			            #{/else}
 			        </p>
 					<table id="table" data-toggle="table" data-query-params="queryParams" data-toolbar=".toolbar" data-side-pagination="server" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="createDate" data-sort-order="desc">
 					    <thead>
 					    <tr>
 					       		<th data-field="state" data-checkbox="true" ></th>
 						        <th data-field="id" data-sortable="true">评论ID</th>
-						        <th data-field="user.username"  data-sortable="true" data-formatter="sub10Formatter">用户名</th>
-						        <th data-field="post.title"  data-sortable="true" data-formatter="sub20Formatter">内容标题</th>
+						        <th data-field="post.title"  data-sortable="true" data-formatter="sub20Formatter">文章标题</th>
+						        <th data-field="parent.content"  data-sortable="true" data-formatter="sub20Formatter">父评论内容</th>
 						        <th data-field="content"  data-sortable="true" data-formatter="sub20Formatter">评论内容</th>
+						        <th data-field="user.username"  data-sortable="true" data-formatter="sub10Formatter">用户名</th>
 						        <th data-field="recommend"  data-sortable="true" data-formatter="recommendFormatter">推荐</th>
 						        <th data-field="status" data-sortable="true" data-formatter="statusFormatter">状态</th>
 						        <th data-field="createDate" data-sortable="true" data-formatter="dateFormatter">创建日期</th>
-						        <th data-field="updateDate" data-sortable="true" data-formatter="dateFormatter">修改日期</th>
+						        <th data-field="updateDate" data-sortable="true" data-visible="false" data-formatter="dateFormatter">修改日期</th>
 						        <th data-field="action"
 				                    data-align="center"
 				                    data-formatter="actionFormatter"
@@ -79,8 +84,6 @@
 	<script src="/public/javascripts/bootstrap/bootstrap-table.js"></script>
 	<script src="/public/javascripts/datetime/date-format.js"></script>
 	<script type="text/javascript">
-		var API_URL_CREATE = '/admin/comments/create';
-		var API_URL_UPDATE = '/admin/comments/modify?id=';
 		var API_URL_DELETE = '/admin/comments/remove?id=';
 		var API_URL_GET = '/admin/comments/data';
 		function recommendFormatter(value) {
@@ -95,7 +98,18 @@
 			}
 			return '<span class="label label-success">正常</span>';
 		}
+		function queryParams(params) {
+			$.extend(params);
+		    return params;
+		}
 	</script>
 	<script src="/public/javascripts/bootstrap/bootstrap-table-crud.js"></script>
+	<script type="text/javascript">
+		function actionFormatter(value) {
+		    return [
+'<a class="remove" style="color: red;margin-left: 5px;" href="javascript:" title="删除"><i class="glyphicon glyphicon-remove-circle"></i></a>'
+		    ].join('');
+		}
+	</script>
 #{/set}
 

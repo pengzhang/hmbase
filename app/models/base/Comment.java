@@ -13,11 +13,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ForeignKey;
 
+import play.data.validation.Required;
 import play.db.Model;
 import utils.SQLUtil;
 import exceptions.ServiceException;
 import models.BaseModel;
 import models.data.PageData;
+import models.data.ResponseData;
 
 
 @Entity
@@ -25,6 +27,7 @@ import models.data.PageData;
 @org.hibernate.annotations.Table(comment="评论管理", appliesTo = "comment")
 public class Comment extends BaseModel {
 	
+	@Required(message="评论内容不能为空")
 	@Column(nullable=false,columnDefinition="varchar(2000) comment '评论内容'")
     public String content;
 	
@@ -50,6 +53,12 @@ public class Comment extends BaseModel {
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="parent")
 	public List<Comment> children;
+	
+	public static void remove(long id){
+		Comment comment = Comment.findById(id);
+		comment.status = true;
+		comment.save();
+	}
 
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {
 		return SQLUtil.findByPage(Comment.class, page, size, search, searchFields, orderBy, order, where);

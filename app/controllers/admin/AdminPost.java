@@ -70,6 +70,11 @@ public class AdminPost extends AdminController {
 		Post.remove(id);
 		renderJSON(ResponseData.response(true, "文章删除成功"));
 	}
+	
+	public static void publish(long id){
+		Post.publish(id);
+		renderJSON(ResponseData.response(true, "文章发布成功"));
+	}
 
 	public static void PostsData(Integer limit, Integer offset, String search, String sort, String order){
 		PageData pageData = Post.findByPageData(offset/limit+1, limit, search, null, sort, order, null);

@@ -84,7 +84,7 @@
 		                        </label>
 	                    	</div>
 	                    </div>
-	                     <div class="form-group">
+	                    <div class="form-group">
 	                        <label>首页滚动</label>
 	                    	<div>
 	                    		<label class="radio-inline">
@@ -95,8 +95,10 @@
 		                        </label>
 	                    	</div>
 	                    </div>
+	                    <input type="hidden" id="draft" name="post.draft" value="false">
 	                    <div class="form-group">
-	                    	<button type="submit" class="btn btn-primary">提交</button>
+	                    	<button type="submit" class="btn btn-primary">直接发布</button>
+	                    	<button id="save" type="submit" class="btn btn-primary">保存草稿</button>
 	                    </div>
 					</div>
 				</div>
@@ -144,6 +146,14 @@
 <script type="text/javascript" src="/public/simditor/beautify-html.js"></script>
 <script type="text/javascript" src="/public/simditor/simditor-html.js"></script>
 <script type="text/javascript" src="/public/webuploader/webuploader.js"></script>
+<script type="text/javascript">
+  $(function() {
+	  $('#save').click(function(){
+		  $('#draft').value('true');
+		  $('form').submit();
+	  });
+  });
+</script>
 <script type="text/javascript">
   $(function() {
     var introdution = new Simditor({

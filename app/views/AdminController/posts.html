@@ -48,6 +48,7 @@
 					        <th data-field="recommend"  data-sortable="true" data-formatter="recommendFormatter">推荐</th>
 					        <th data-field="hot"  data-sortable="true" data-formatter="hotFormatter">热文</th>
 					        <th data-field="banner"  data-sortable="true" data-formatter="bannerFormatter">滚动</th>
+					        <th data-field="draft"  data-sortable="true" data-formatter="draftFormatter">草稿</th>
 					        <th data-field="user.username"  data-sortable="true">作者</th>
 					        <th data-field="status" data-sortable="true" data-formatter="statusFormatter">状态</th>
 					        <th data-field="createDate" data-sortable="true" data-formatter="dateFormatter">创建日期</th>
@@ -71,6 +72,7 @@
 	<script type="text/javascript">
 		var API_URL_UPDATE = '/admin/posts/modify?id=';
 		var API_URL_DELETE = '/admin/posts/remove?id=';
+		var API_URL_PUBLISH = '/admin/posts/publish?id=';
 		var API_URL_GET = '/admin/posts/data';
 		function recommendFormatter(value) {
 			if(value){
@@ -90,6 +92,12 @@
 				return '<span class="label label-warning">滚动</span>';
 			}
 			return '<span class="label label-info">普通</span>';
+		}
+		function draftFormatter(value) {
+			if(value){
+				return '<span class="label label-success">已发布</span>';
+			}
+			return '<span class="label label-warning">草稿</span>';
 		}
 		function statusFormatter(value) {
 			if(value){
@@ -117,5 +125,50 @@
 		}
 	</script>
 	<script src="/public/javascripts/bootstrap/bootstrap-table-crud.js"></script>
+	<script type="text/javascript">
+		window.actionEvents = {
+		    'click .update': function (e, value, row) {
+		        //showModal($(this).attr('title'), row);
+		    	window.location.href=API_URL_UPDATE + row.id;
+		    },
+		    'click .remove': function (e, value, row) {
+		        if (confirm('真的要删除吗?')) {
+		            $.ajax({
+		                url: API_URL_DELETE + row.id,
+		                type: 'get',
+		                success: function () {
+		                    $table.bootstrapTable('refresh');
+		                    showAlert('删除成功!', 'success');
+		                },
+		                error: function () {
+		                    showAlert('删除失败!', 'danger');
+		                }
+		            })
+		        }
+		    },
+		    'click .publish': function (e, value, row) {
+		        if (confirm('真的要发布吗?')) {
+		            $.ajax({
+		                url: API_URL_PUBLISH + row.id,
+		                type: 'get',
+		                success: function () {
+		                    $table.bootstrapTable('refresh');
+		                    showAlert('发布成功!', 'success');
+		                },
+		                error: function () {
+		                    showAlert('发布失败!', 'danger');
+		                }
+		            })
+		        }
+		    }
+		};
+		function actionFormatter(value) {
+		    return [
+				'<a class="publish" style="color: #333;margin-right: 5px;" href="javascript:" title="发布"><i class="glyphicon glyphicon-send"></i></a>',    
+		        '<a class="update" style="color: #333;margin-right: 5px;" href="javascript:" title="修改"><i class="glyphicon glyphicon-edit"></i></a>',
+		        '<a class="remove" style="color: red;margin-left: 5px;" href="javascript:" title="删除"><i class="glyphicon glyphicon-remove-circle"></i></a>'
+		    ].join('');
+		}
+	</script>
 #{/set}
 

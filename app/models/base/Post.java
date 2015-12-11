@@ -54,6 +54,9 @@ public class Post extends BaseModel {
 	@Column(columnDefinition="tinyint comment '0-普通 1-滚动'")
 	public boolean banner = false;
 	
+	@Column(columnDefinition="tinyint default 0 comment '0-草稿 1-发布'")
+	public boolean draft = false;
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
 	@ForeignKey(name="null")
@@ -81,6 +84,12 @@ public class Post extends BaseModel {
 	public static void remove(long id){
 		Post post = Post.findById(id);
 		post.status = true;
+		post.save();
+	}
+	
+	public static void publish(long id){
+		Post post = Post.findById(id);
+		post.draft = true;
 		post.save();
 	}
 

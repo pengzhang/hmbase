@@ -61,6 +61,6 @@ public class AdminCategory extends AdminController {
 
 	public static void categoriesData(Integer limit, Integer offset, String search, String sort, String order){
 		PageData pageData = Category.findByPageData(offset/limit+1, limit, search, null, sort, order, null);
-		renderJSON(JsonUtil.toJson(pageData,"children"));
+		renderJSON(JsonUtil.toJson(pageData,"children","posts","images"));
 	}
 }

@@ -22,6 +22,7 @@ import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.db.Model;
 import play.libs.Crypto;
+import utils.MengDateUtils;
 import utils.SQLUtil;
 import exceptions.ServiceException;
 
@@ -75,6 +76,13 @@ public class User extends BaseModel {
 		User user = User.findById(id);
 		user.status = true;
 		user.save();
+	}
+	
+	public static long count(int day){
+		if(day<0){
+			return User.count("createDate>? and createDate<?",MengDateUtils.dayTruncate(day),MengDateUtils.tomorrowTruncate());
+		}
+		return User.count("createDate>? and createDate<?",MengDateUtils.todayTruncate(),MengDateUtils.dayTruncate(day));
 	}
 	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {

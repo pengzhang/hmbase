@@ -19,6 +19,7 @@ import models.BaseModel;
 import models.data.PageData;
 import play.data.validation.Required;
 import play.db.Model;
+import utils.MengDateUtils;
 import utils.SQLUtil;
 
 @Entity
@@ -91,6 +92,13 @@ public class Post extends BaseModel {
 		Post post = Post.findById(id);
 		post.draft = true;
 		post.save();
+	}
+	
+	public static long count(int day){
+		if(day<0){
+			return Post.count("createDate>? and createDate<?",MengDateUtils.dayTruncate(day),MengDateUtils.tomorrowTruncate());
+		}
+		return Post.count("createDate>? and createDate<?",MengDateUtils.todayTruncate(),MengDateUtils.dayTruncate(day));
 	}
 
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {

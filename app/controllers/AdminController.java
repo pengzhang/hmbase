@@ -1,13 +1,9 @@
 package controllers;
 
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Map;
 
-import org.apache.commons.lang.time.DateUtils;
-
-import annotation.Login;
+import models.base.Category;
 import models.base.Comment;
 import models.base.Image;
 import models.base.Post;
@@ -34,20 +30,24 @@ public class AdminController extends Controller {
     
     @Check("admin")
     public static void users(){
+    	renderArgs.put("userTotal", User.count());
+    	renderArgs.put("todayTotal", User.count(1));
+    	renderArgs.put("weekTotal", User.count(-7));
+    	renderArgs.put("monthTotal", User.count(-30));
+    	renderArgs.put("_100Total", User.count(-100));
     	String menu = "user";
     	render(menu);
     }
     
     public static void categories(){
+    	renderArgs.put("categoryTotal", Category.count());
     	String menu = "category";
     	render(menu);
     }
     
     public static void posts(){
     	renderArgs.put("postTotal", Post.count());
-    	Date start = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
-    	Date end = DateUtils.truncate(DateUtils.addDays(new Date(), 1), Calendar.DAY_OF_MONTH);
-    	renderArgs.put("todayTotal", Post.count("createDate>? and createDate<?",start,end));
+    	renderArgs.put("todayTotal", Post.count(1));
     	renderArgs.put("publishTotal", Post.count("draft",true));
     	renderArgs.put("draftTotal", Post.count("draft",false));
     	renderArgs.put("recommendTotal", Post.count("recommend",true));
@@ -58,6 +58,11 @@ public class AdminController extends Controller {
     }
     
     public static void comments(){
+    	renderArgs.put("commentTotal", Comment.count());
+    	renderArgs.put("todayTotal", Comment.count(1));
+    	renderArgs.put("unAuditTotal", Comment.count("audit",false));
+    	renderArgs.put("auditedTotal", Comment.count("audit",true));
+    	renderArgs.put("removeTotal", Comment.count("status",true));
     	String menu = "comment";
     	render(menu);
     }

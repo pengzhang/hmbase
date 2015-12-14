@@ -11,6 +11,7 @@ GET     /                                       Application.index
 # Assist
 GET     /captcha                                Assist.captcha
 POST    /upload/file                            Assist.upload
+GET		/download/file                          Assist.download
 
 # Admin Controller
 GET     /admin                                  AdminController.index
@@ -75,7 +76,6 @@ GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
-GET     /upload/                                staticDir:data/attachments
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}

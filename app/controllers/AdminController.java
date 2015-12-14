@@ -28,16 +28,7 @@ public class AdminController extends Controller {
         render();
     }
     
-    @Check("admin")
-    public static void users(){
-    	renderArgs.put("userTotal", User.count());
-    	renderArgs.put("todayTotal", User.count(1));
-    	renderArgs.put("weekTotal", User.count(-7));
-    	renderArgs.put("monthTotal", User.count(-30));
-    	renderArgs.put("_100Total", User.count(-100));
-    	String menu = "user";
-    	render(menu);
-    }
+    
     
     public static void categories(){
     	renderArgs.put("categoryTotal", Category.count());
@@ -69,6 +60,22 @@ public class AdminController extends Controller {
     
     public static void images(){
     	String menu = "image";
+    	render(menu);
+    }
+    
+    public static void attachment(){
+    	String menu = "attachment";
+    	render(menu);
+    }
+    
+    @Check("admin")
+    public static void users(){
+    	renderArgs.put("userTotal", User.count());
+    	renderArgs.put("todayTotal", User.count(1));
+    	renderArgs.put("weekTotal", User.count(-7));
+    	renderArgs.put("monthTotal", User.count(-30));
+    	renderArgs.put("_100Total", User.count(-100));
+    	String menu = "user";
     	render(menu);
     }
     

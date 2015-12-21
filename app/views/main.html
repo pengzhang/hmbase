@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        #{get 'moreStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/jquery-1.11.1.min.js'}" type="text/javascript" charset="utf-8"></script>
-        #{get 'moreScripts' /}
-    </head>
-    <body>
-        #{doLayout /}
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>#{get 'title' /}</title>
+    <link href="/public/stylesheets/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/stylesheets/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/public/stylesheets/main.css" rel="stylesheet">
+    #{get 'moreStyles' /}
+
+    <!--[if lt IE 9]>
+    <script src="/public/javascripts/html5shiv.min.js"></script>
+    <script src="/public/javascripts/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+#{include 'Common/nav.html'/}
+#{doLayout /}
+<script src="/public/javascripts/jquery-1.11.1.min.js"></script>
+<script src="/public/javascripts/bootstrap/bootstrap.min.js"></script>
+#{get 'moreScripts' /}
+</body>
+
 </html>

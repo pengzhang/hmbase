@@ -1,0 +1,17 @@
+body {
+    background:#f3f3f3;
+}
+.navbar-default {
+    background:rgba(0,0,0,0.2);
+}
+.border-rect {
+    background-color: #fff;
+    border-color: #ddd;
+    border-radius: 0px;
+    border-width: 1px;
+    box-shadow: none;
+    margin-left: 0;
+    margin-right: 0;
+    border-style: solid;
+    padding: 15px 10px;
+}

@@ -9,6 +9,7 @@
 		<li #{if menu=='category'}class="active"#{/if}><a href="/admin/categories"><span class="glyphicon glyphicon-list"></span> 分类列表</a></li>
 		<li #{if menu=='post'}class="active"#{/if}><a href="/admin/posts"><span class="glyphicon glyphicon-list-alt"></span> 文章列表</a></li>
 		<li #{if menu=='comment'}class="active"#{/if}><a href="/admin/comments"><span class="glyphicon glyphicon-comment"></span> 评论列表</a></li>
+		<li #{if menu=='tag'}class="active"#{/if}><a href="/admin/tags"><span class="glyphicon glyphicon-tag"></span> 标签列表</a></li>
 		#{secure.check 'admin'}
 		<li #{if menu=='user'}class="active"#{/if}><a href="/admin/users"><span class="glyphicon glyphicon-user"></span> 用户列表</a></li>
 		<li #{if menu=='user_profile'}class="active"#{/if}><a href="/admin/users/profile"><span class="glyphicon glyphicon-user"></span> 用户资料</a></li>

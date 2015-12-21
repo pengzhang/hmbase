@@ -16,7 +16,6 @@ import play.mvc.With;
 @With(value={ActionInterceptor.class,Secure.class})
 public class AdminController extends Controller {
 	
-	
     public static void index() throws ParseException{
     	renderArgs.put("userTotal", User.count());
     	renderArgs.put("postTotal", Post.count());
@@ -27,8 +26,6 @@ public class AdminController extends Controller {
     	renderArgs.put("chart_content", recentAccess.get("chart_content"));
         render();
     }
-    
-    
     
     public static void categories(){
     	renderArgs.put("categoryTotal", Category.count());
@@ -65,6 +62,11 @@ public class AdminController extends Controller {
     
     public static void attachment(){
     	String menu = "attachment";
+    	render(menu);
+    }
+    
+    public static void tags(){
+    	String menu = "tag";
     	render(menu);
     }
     

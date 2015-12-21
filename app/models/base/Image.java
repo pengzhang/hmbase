@@ -33,15 +33,15 @@ public class Image extends BaseModel {
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public User user;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public List<Category> categories;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public List<Tag> tags;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="image")

@@ -29,17 +29,17 @@ public class Social extends BaseModel {
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public User user;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="post_id")
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public Post post;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="image_id")
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public Image image;
 	
 	public static List<Model> findByPage(int page, int size, String search, String searchFields, String orderBy, String order, String where) throws ServiceException {

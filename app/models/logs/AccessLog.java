@@ -107,5 +107,4 @@ public class AccessLog extends BaseModel {
 		return map;
 	}
 	
-
 }

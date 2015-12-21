@@ -1,5 +1,6 @@
 package controllers.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import controllers.ActionInterceptor;
@@ -8,6 +9,7 @@ import controllers.Secure;
 import controllers.Security;
 import models.base.Category;
 import models.base.Post;
+import models.base.Tag;
 import models.base.User;
 import models.data.PageData;
 import models.data.ResponseData;
@@ -33,7 +35,15 @@ public class AdminPost extends AdminController {
 		render(categories);
 	}
 	
-	public static void save(@Valid(message="请检查") Post post){
+	public static void save(@Valid(message="请检查") Post post, String tags){
+		// 为post对象添加tag
+		post.tags = new ArrayList<Tag>();
+	    for(String tag : tags.split("\\s+")) {
+	        if(tag.trim().length() > 0) {
+	            post.tags.add(Tag.findOrCreateByName(tag));
+	        }
+	    }
+
 		if(validation.hasErrors()){
 			params.flash();
 			validation.keep();
@@ -51,9 +61,14 @@ public class AdminPost extends AdminController {
 		render(post,categories);
 	}
 	
-	public static void update(long id){
+	public static void update(long id,String tags){
 		Post post = Post.findById(id);
 		post.edit(params.getRootParamNode(), "post");
+		for(String tag : tags.split("\\s+")) {
+	        if(tag.trim().length() > 0) {
+	            post.tags.add(Tag.findOrCreateByName(tag));
+	        }
+	    }
 		validation.valid(post);
 	    if(validation.hasErrors()) {
 	    	post.refresh();

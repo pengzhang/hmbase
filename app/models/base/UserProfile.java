@@ -59,7 +59,7 @@ public class UserProfile extends BaseModel implements Serializable {
 	
 	@OneToOne(cascade=CascadeType.ALL,optional=false)
 	@JoinColumn(name="userid")
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public User user;
 	
 	public static void save(User user){

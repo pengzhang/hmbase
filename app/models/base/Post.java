@@ -60,15 +60,15 @@ public class Post extends BaseModel {
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public User user;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public List<Category> categories;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public List<Tag> tags;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="post")
@@ -92,6 +92,17 @@ public class Post extends BaseModel {
 		Post post = Post.findById(id);
 		post.draft = true;
 		post.save();
+	}
+	
+	public Post tagItWith(String name) {
+	    tags.add(Tag.findOrCreateByName(name));
+	    return this;
+	}
+	
+	public static List<Post> findTaggedWith(String... tags) {
+	    return Post.find(
+	            "select distinct p from Post p join p.tags as t where t.name in (:tags) group by p.id, p.title having count(t.id) = :size"
+	    ).bind("tags", tags).bind("size", tags.length).fetch();
 	}
 	
 	public static long count(int day){

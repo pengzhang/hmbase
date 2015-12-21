@@ -41,7 +41,7 @@ GET     /admin/tags                             AdminController.tags
 POST    /admin/tags/create                      admin.AdminCategory.createTag
 POST    /admin/tags/modify                      admin.AdminTag.modifyTag
 GET     /admin/tags/remove                      admin.AdminTag.removeTag
-GET     /admin/tags/data                        admin.AdminTag.TagData
+GET     /admin/tags/data                        admin.AdminTag.tagsData
 
 GET     /admin/posts                            AdminController.posts
 GET     /admin/posts/create                     admin.AdminPost.create

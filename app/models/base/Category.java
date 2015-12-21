@@ -44,18 +44,18 @@ public class Category extends BaseModel {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="pid")
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public Category parent;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="parent",fetch=FetchType.LAZY)
 	public List<Category> children;
 	
 	@ManyToMany(cascade=CascadeType.ALL,mappedBy="categories",fetch=FetchType.LAZY)
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public List<Post> posts;
 	
 	@ManyToMany(cascade=CascadeType.ALL,mappedBy="categories",fetch=FetchType.LAZY)
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public List<Image> images;
 	
 	public static void update(Category category) {

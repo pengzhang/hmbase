@@ -37,22 +37,22 @@ public class Comment extends BaseModel {
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public User user;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="post_id")
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public Post post;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="image_id")
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public Image image;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="pid")
-	@ForeignKey(name="null")
+//	@ForeignKey(name="null")
 	public Comment parent;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="parent")

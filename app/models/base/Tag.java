@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Index;
+
 import exceptions.ServiceException;
 import models.BaseModel;
 import models.data.PageData;
@@ -19,6 +21,7 @@ import utils.SQLUtil;
 public class Tag extends BaseModel {
 
 	@Column(nullable = false, columnDefinition = "varchar(255) comment '标签名称'")
+	@Index(name="tag")
 	public String tag;
 
 	@Column(columnDefinition = "varchar(255) comment '标签描述'")

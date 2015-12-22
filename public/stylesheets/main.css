@@ -1,10 +1,7 @@
 body {
     background:#f3f3f3;
 }
-.navbar-default {
-    background:rgba(0,0,0,0.2);
-}
-.border-rect {
+.hm-border-rect {
     background-color: #fff;
     border-color: #ddd;
     border-radius: 0px;
@@ -14,4 +11,17 @@ body {
     margin-right: 0;
     border-style: solid;
     padding: 15px 10px;
+}
+.nav{
+    margin-bottom: -21px;
+}
+.hm-index-nav-tabs{
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+.hm-index-nav-tabs > h2{
+    font-size: 20px;
+    margin: 0;
+    position: absolute;
 }

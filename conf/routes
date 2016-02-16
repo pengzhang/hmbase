@@ -11,7 +11,7 @@ GET     /                                       Application.index
 # Assist
 GET     /captcha                                Assist.captcha
 POST    /upload/file                            Assist.upload
-GET		/download/file                          Assist.download
+GET		/download/file/{id}                     Assist.download
 
 # Admin Controller
 GET     /admin                                  AdminController.index

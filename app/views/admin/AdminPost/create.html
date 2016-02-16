@@ -229,7 +229,7 @@
           pick: '#filePicker',
           
           //限制文件个数
-          fileNumLimit:1,
+          fileNumLimit:2,
           
           // 只允许选择文件，可选。
           accept: {
@@ -241,6 +241,11 @@
 
       // 当有文件添加进来的时候
       uploader.on( 'fileQueued', function( file ) {
+    	  //每次都清除
+    	  $list.empty();
+    	  $('#coverImage').val("");
+          $('#coverImageAlt').val("");
+          
           var $li = $(
                   '<div id="' + file.id + '" class="file-item thumbnail">' +
                       '<img>' +

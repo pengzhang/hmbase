@@ -40,7 +40,7 @@ public class Assist extends Controller {
 			upload.name = file.getName();
 			upload.file.set(new FileInputStream(file), MimeTypes.getContentType(file.getName()));
 			upload.save();
-			renderJSON(new Simditor(true, "upload success", ImageServerDomain + "/download/file?id=" + upload.id));
+			renderJSON(new Simditor(true, "upload success", ImageServerDomain + "/download/file/" + upload.id));
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

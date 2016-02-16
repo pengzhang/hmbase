@@ -135,11 +135,15 @@
 						<div class="form-group">
 							<div id="uploader-demo">
 							    <!--用来存放item-->
-							    <div id="fileList" class="uploader-list"></div>
+							    <div id="fileList" class="uploader-list">
+							      <div class="file-item thumbnail">
+				                      <img src="${post.coverImage}" width="150" height="150">
+				                  </div>
+							    </div>
 							    <div id="filePicker">选择图片</div>
 							</div>
-							<input type="hidden" id="coverImage" name="post.coverImage">
-							<input type="hidden" id="coverImageAlt" name="post.coverImageAlt">
+							<input type="hidden" id="coverImage" name="post.coverImage" value="${post.coverImage}">
+							<input type="hidden" id="coverImageAlt" name="post.coverImageAlt" value="${post.coverImageAlt}">
 		                </div>
 					</div>
 				</div>
@@ -235,6 +239,11 @@
 
       // 当有文件添加进来的时候
       uploader.on( 'fileQueued', function( file ) {
+    	  //每次都清除
+    	  $list.empty();
+    	  $('#coverImage').val("");
+          $('#coverImageAlt').val("");
+          
           var $li = $(
                   '<div id="' + file.id + '" class="file-item thumbnail">' +
                       '<img>' +
